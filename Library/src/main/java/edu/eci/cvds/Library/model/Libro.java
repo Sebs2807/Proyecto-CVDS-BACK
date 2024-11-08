@@ -6,9 +6,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.List;
 
-/**
- * Clase que representa un libro en la biblioteca.
- */
 @Document(collection = "libros")
 public class Libro {
     @Id
