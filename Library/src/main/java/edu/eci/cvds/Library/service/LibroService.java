@@ -2,6 +2,12 @@ package edu.eci.cvds.Library.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import edu.eci.cvds.Library.model.Libro;
@@ -47,39 +53,19 @@ public class LibroService {
         libroRepository.deleteById(id);
     }
 
-    /**
-     * Busca los libros que coinciden en el titulo
-     * @param titulo Titulo del libro a buscar
-     * @return Libros que coinciden en el título
-     */
-    public List<Libro> buscarLibrosPorTitulo(String titulo) {
-        return libroRepository.findByTitulo(titulo);
+    public void cargarLibrosDesdeJson(String rutaArchivo) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            // Leer el archivo JSON y convertirlo a una lista de libros
+            List<Libro> libros = mapper.readValue(new File(rutaArchivo), new TypeReference<List<Libro>>(){});
+            
+            // Guardar todos los libros en la base de datos
+            libroRepository.saveAll(libros);
+        } catch (IOException e) {
+            // Manejo adecuado de excepciones
+            e.printStackTrace();  // O puedes usar un logger
+            throw new RuntimeException("Error al cargar los libros desde el archivo JSON", e);
+        }
     }
     
-    /**
-     * Busca los libros que coinciden en el autor
-     * @param titulo Nombre del autor del libro a buscar
-     * @return Libros que coinciden en el título
-     */
-    public List<Libro> buscarLibrosPorAutor(String autor) {
-        return libroRepository.findByAutor(autor);
-    }
-
-    /**
-     * Busca los libros que coinciden en la categoria
-     * @param titulo Categoria del libro a buscar
-     * @return Libros que coinciden en la categoria
-     */
-    public List<Libro> buscarLibrosPorCategoria(String categoria) {
-        return libroRepository.findByCategoria(categoria);
-    }
-
-    /**
-     * Busca los libros que coinciden en el año de publicación
-     * @param titulo Año de publicación del libro a buscar
-     * @return Libros que coinciden en el año de publicación
-     */
-    public List<Libro> buscarLibrosPorAnioPublicacion(Integer anioPublicacion) {
-        return libroRepository.findByAnioPublicacion(anioPublicacion);
-    }
 }

@@ -63,36 +63,14 @@ public class LibroController {
         return ResponseEntity.noContent().build();
     }
 
-    /**
-     * Busca libros por título.
-     * @param titulo El título del libro a buscar.
-     * @return ResponseEntity con los libros encontrados.
-     */
-    @GetMapping("/buscar/titulo")
-    public ResponseEntity<List<Libro>> buscarLibrosPorTitulo(@RequestParam String titulo) {
-        List<Libro> libros = libroService.buscarLibrosPorTitulo(titulo);
-        return libros.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(libros);
+    @GetMapping("/test")
+    public String testEndpoint() {
+        return "El endpoint está funcionando.";
     }
 
-    /**
-     * Busca libros por autor.
-     * @param autor El autor del libro a buscar.
-     * @return ResponseEntity con los libros encontrados.
-     */
-    @GetMapping("/buscar/autor")
-    public ResponseEntity<List<Libro>> buscarLibrosPorAutor(@RequestParam String autor) {
-        List<Libro> libros = libroService.buscarLibrosPorAutor(autor);
-        return libros.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(libros);
-    }
-
-    /**
-     * Busca libros por categoría.
-     * @param categoria La categoría del libro a buscar.
-     * @return ResponseEntity con los libros encontrados.
-     */
-    @GetMapping("/buscar/categoria")
-    public ResponseEntity<List<Libro>> buscarLibrosPorCategoria(@RequestParam String categoria) {
-        List<Libro> libros = libroService.buscarLibrosPorCategoria(categoria);
-        return libros.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(libros);
+    @PostMapping("/cargar-desde-json")
+    public ResponseEntity<Void> cargarLibrosDesdeJson(@RequestParam String rutaArchivo) {
+        libroService.cargarLibrosDesdeJson(rutaArchivo);
+        return ResponseEntity.ok().build();
     }
 }
