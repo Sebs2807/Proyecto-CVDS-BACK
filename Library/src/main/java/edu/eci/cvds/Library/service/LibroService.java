@@ -53,6 +53,15 @@ public class LibroService {
         libroRepository.deleteById(id);
     }
 
+    /**
+     * Actualiza un libro ya existente en la base de datos
+     * @param libro Libro a actualizar
+     * @return Libro actualizado
+     */
+    public Libro actualizarLibro(Libro libro) {
+        return libroRepository.save(libro);
+    }
+
     public void cargarLibrosDesdeJson(String rutaArchivo) {
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -63,7 +72,7 @@ public class LibroService {
             libroRepository.saveAll(libros);
         } catch (IOException e) {
 
-            e.printStackTrace();  // O puedes usar un logger
+            e.printStackTrace();
             throw new RuntimeException("Error al cargar los libros desde el archivo JSON", e);
         }
     }
