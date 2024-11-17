@@ -90,9 +90,9 @@ public class LibroController {
         return "El endpoint está funcionando.";
     }
 
-    @PostMapping("/cargar-desde-json")
-    public ResponseEntity<Void> cargarLibrosDesdeJson(@RequestParam String rutaArchivo) {
-        libroService.cargarLibrosDesdeJson(rutaArchivo);
-        return ResponseEntity.ok().build();
-    }
+    // @PostMapping("/cargar-desde-json")
+    // public ResponseEntity<Void> cargarLibrosDesdeJson(@RequestParam String rutaArchivo) {
+    //     libroService.cargarLibrosDesdeJson(rutaArchivo);
+    //     return ResponseEntity.ok().build();
+    // }
 }

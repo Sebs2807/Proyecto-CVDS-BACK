@@ -22,9 +22,8 @@
         <sonar.organization>sebs2807</sonar.organization> <!-- Usar el nombre de tu organización -->
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-        <sonar.coverage.exclusions>**/TaskApplication.java,**/TaskController.java,**/TasksApplication.java,**/WebConfig.java</sonar.coverage.exclusions>
+    <sonar.coverage.exclusions>**/LibraryApplication.class, **/CustomIntegerDeserializer.class, **/Ejemplar.class, **/LibroController.class</sonar.coverage.exclusions>    
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -86,20 +85,10 @@
                         </goals>
                         <configuration>
                             <excludes>
-                                <exclude>**/TaskApplication.class</exclude>
-                                <exclude>**/WebConfig.class</exclude>
-                                <exclude>**/WebSecurityConfig.class</exclude>
-                                <exclude>**/TaskController.class</exclude>
-                                <exclude>**/AuthController.class</exclude>
-                                <exclude>**/Difficulty.class</exclude>
-                                <exclude>**/Task.class</exclude>
-                                <exclude>**/Token.class</exclude>
-                                <exclude>**/User.class</exclude>
-                                <exclude>**/TaskRepository.class</exclude>
-                                <exclude>**/TokenRepository.class</exclude>
-                                <exclude>**/UserRepository.class</exclude>
-                                <exclude>**/MongoUserDetailsService.class</exclude>
-                                <exclude>**/AuthService.class</exclude>
+                                <exclude>**/LibraryApplication.class</exclude>
+                                <exclude>**/CustomIntegerDeserializer.class</exclude>
+                                <exclude>**/Ejemplar.class</exclude>
+                                <exclude>**/LibroController.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
