@@ -17,9 +17,10 @@
 
     <properties>
         <java.version>17</java.version>
-        <sonar.projectKey>Tasks</sonar.projectKey>
-        <sonar.projectName>Tasks</sonar.projectName>
-        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.projectKey>Sebs2807_Proyecto-CVDS-BACK</sonar.projectKey>
+        <sonar.projectName>Proyecto CVDS BACK</sonar.projectName>
+        <sonar.organization>sebs2807</sonar.organization> <!-- Usar el nombre de tu organización -->
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.coverage.exclusions>**/TaskApplication.java,**/TaskController.java,**/TasksApplication.java,**/WebConfig.java</sonar.coverage.exclusions>
     </properties>
