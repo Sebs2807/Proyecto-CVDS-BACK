@@ -56,13 +56,13 @@ public class LibroService {
     public void cargarLibrosDesdeJson(String rutaArchivo) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            // Leer el archivo JSON y convertirlo a una lista de libros
+
             List<Libro> libros = mapper.readValue(new File(rutaArchivo), new TypeReference<List<Libro>>(){});
             
-            // Guardar todos los libros en la base de datos
+
             libroRepository.saveAll(libros);
         } catch (IOException e) {
-            // Manejo adecuado de excepciones
+
             e.printStackTrace();  // O puedes usar un logger
             throw new RuntimeException("Error al cargar los libros desde el archivo JSON", e);
         }

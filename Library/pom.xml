@@ -8,11 +8,11 @@
         <version>3.3.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-	<groupId>edu.eci.cvds</groupId>
-	<artifactId>Library</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Library</name>
-	<description>El proyecto consiste en una aplicación de gestión de la biblioteca de un colegio</description>
+<groupId>edu.eci.cvds</groupId>
+    <artifactId>Library</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Library</name>
+    <description>El proyecto consiste en una aplicación de gestión de la biblioteca de un colegio</description>
     <url/>
     <licenses>
         <license/>
@@ -28,15 +28,11 @@
     </scm>
     <properties>
         <java.version>17</java.version>
-        <sonar.projectKey>Library</sonar.projectKey>
-        <sonar.projectName>Library</sonar.projectName>
+        <sonar.projectKey>Tasks</sonar.projectKey>
+        <sonar.projectName>Tasks</sonar.projectName>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-        <!-- <sonar.coverage.exclusions>**/TaskApplication.java,**/TaskController.java,**/TasksApplication.java,**/WebConfig.java</sonar.coverage.exclusions> -->
-    </properties>
-    <properties>
-        <sonar.organization>sebs2807</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.coverage.exclusions>**/TaskApplication.java,**/TaskController.java,**/TasksApplication.java,**/WebConfig.java</sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <dependency>
@@ -45,16 +41,17 @@
             <version>1.0.2</version>
         </dependency>
         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,6 +63,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -96,19 +97,22 @@
                             <goal>report</goal>
                         </goals>
                         <configuration>
-                            <!-- <excludes>
-                                <exclude>**/TaskApplication</exclude>
+                            <excludes>
+                                <exclude>**/TaskApplication.class</exclude>
                                 <exclude>**/WebConfig.class</exclude>
                                 <exclude>**/WebSecurityConfig.class</exclude>
                                 <exclude>**/TaskController.class</exclude>
                                 <exclude>**/AuthController.class</exclude>
                                 <exclude>**/Difficulty.class</exclude>
+                                <exclude>**/Task.class</exclude>
+                                <exclude>**/Token.class</exclude>
+                                <exclude>**/User.class</exclude>
                                 <exclude>**/TaskRepository.class</exclude>
                                 <exclude>**/TokenRepository.class</exclude>
                                 <exclude>**/UserRepository.class</exclude>
                                 <exclude>**/MongoUserDetailsService.class</exclude>
                                 <exclude>**/AuthService.class</exclude>
-                            </excludes> -->
+                            </excludes>
                         </configuration>
                     </execution>
                     <execution>
