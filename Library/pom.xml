@@ -8,24 +8,13 @@
         <version>3.3.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-<groupId>edu.eci.cvds</groupId>
+
+    <groupId>edu.eci.cvds</groupId>
     <artifactId>Library</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Library</name>
     <description>El proyecto consiste en una aplicación de gestión de la biblioteca de un colegio</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+
     <properties>
         <java.version>17</java.version>
         <sonar.projectKey>Tasks</sonar.projectKey>
@@ -34,6 +23,7 @@
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.coverage.exclusions>**/TaskApplication.java,**/TaskController.java,**/TasksApplication.java,**/WebConfig.java</sonar.coverage.exclusions>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -66,13 +56,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
