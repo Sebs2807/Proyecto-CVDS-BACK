@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import edu.eci.cvds.Library.model.Libro;
 import edu.eci.cvds.Library.repository.LibroRepository;
+import jakarta.annotation.Generated;
 
 @Service
 public class LibroService {
@@ -21,6 +22,7 @@ public class LibroService {
 
     /**
      * Crea un nuevo libro en la base de datos.
+     * 
      * @param libro Objeto libro a crear.
      * @return el libro creado.
      */
@@ -30,6 +32,7 @@ public class LibroService {
 
     /**
      * Obtiene todos los libros almacenados en la base de datos.
+     * 
      * @return lista de todos los libros.
      */
     public List<Libro> obtenerTodosLosLibros() {
@@ -38,6 +41,7 @@ public class LibroService {
 
     /**
      * Obtiene un libro por su ID.
+     * 
      * @param id ID del libro a buscar.
      * @return un Optional con el libro encontrado o vacío si no existe.
      */
@@ -47,25 +51,36 @@ public class LibroService {
 
     /**
      * Elimina un libro por su ID.
+     * 
      * @param id ID del libro a eliminar.
      */
     public void eliminarLibro(String id) {
         libroRepository.deleteById(id);
     }
 
-    public void cargarLibrosDesdeJson(String rutaArchivo) {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            // Leer el archivo JSON y convertirlo a una lista de libros
-            List<Libro> libros = mapper.readValue(new File(rutaArchivo), new TypeReference<List<Libro>>(){});
-            
-            // Guardar todos los libros en la base de datos
-            libroRepository.saveAll(libros);
-        } catch (IOException e) {
-            // Manejo adecuado de excepciones
-            e.printStackTrace();  // O puedes usar un logger
-            throw new RuntimeException("Error al cargar los libros desde el archivo JSON", e);
-        }
+    /**
+     * Actualiza un libro ya existente en la base de datos
+     * 
+     * @param libro Libro a actualizar
+     * @return Libro actualizado
+     */
+    public Libro actualizarLibro(Libro libro) {
+        return libroRepository.save(libro);
     }
-    
+
+    // public void cargarLibrosDesdeJson(String rutaArchivo) {
+    //     ObjectMapper mapper = new ObjectMapper();
+    //     try {
+
+    //         List<Libro> libros = mapper.readValue(new File(rutaArchivo), new TypeReference<List<Libro>>() {
+    //         });
+
+    //         libroRepository.saveAll(libros);
+    //     } catch (IOException e) {
+
+    //         e.printStackTrace();
+    //         throw new RuntimeException("Error al cargar los libros desde el archivo JSON", e);
+    //     }
+    // }
+
 }

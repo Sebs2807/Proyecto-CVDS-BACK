@@ -8,31 +8,21 @@
         <version>3.3.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-	<groupId>edu.eci.cvds</groupId>
-	<artifactId>Library</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Library</name>
-	<description>El proyecto consiste en una aplicación de gestión de la biblioteca de un colegio</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+
+    <groupId>edu.eci.cvds</groupId>
+    <artifactId>Library</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Library</name>
+    <description>El proyecto consiste en una aplicación de gestión de la biblioteca de un colegio</description>
+
     <properties>
         <java.version>17</java.version>
-        <sonar.projectKey>Library</sonar.projectKey>
-        <sonar.projectName>Library</sonar.projectName>
-        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.projectKey>Sebs2807_Proyecto-CVDS-BACK</sonar.projectKey>
+        <sonar.projectName>Proyecto CVDS BACK</sonar.projectName>
+        <sonar.organization>sebs2807</sonar.organization> <!-- Usar el nombre de tu organización -->
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-        <!-- <sonar.coverage.exclusions>**/TaskApplication.java,**/TaskController.java,**/TasksApplication.java,**/WebConfig.java</sonar.coverage.exclusions> -->
+    <sonar.coverage.exclusions>**/LibraryApplication.class, **/CustomIntegerDeserializer.class, **/Ejemplar.class, **/LibroController.class</sonar.coverage.exclusions>    
     </properties>
     <dependencies>
         <dependency>
@@ -46,16 +36,17 @@
             <version>1.0.2</version>
         </dependency>
         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -73,6 +64,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -97,19 +89,12 @@
                             <goal>report</goal>
                         </goals>
                         <configuration>
-                            <!-- <excludes>
-                                <exclude>**/TaskApplication</exclude>
-                                <exclude>**/WebConfig.class</exclude>
-                                <exclude>**/WebSecurityConfig.class</exclude>
-                                <exclude>**/TaskController.class</exclude>
-                                <exclude>**/AuthController.class</exclude>
-                                <exclude>**/Difficulty.class</exclude>
-                                <exclude>**/TaskRepository.class</exclude>
-                                <exclude>**/TokenRepository.class</exclude>
-                                <exclude>**/UserRepository.class</exclude>
-                                <exclude>**/MongoUserDetailsService.class</exclude>
-                                <exclude>**/AuthService.class</exclude>
-                            </excludes> -->
+                            <excludes>
+                                <exclude>**/LibraryApplication.class</exclude>
+                                <exclude>**/CustomIntegerDeserializer.class</exclude>
+                                <exclude>**/Ejemplar.class</exclude>
+                                <exclude>**/LibroController.class</exclude>
+                            </excludes>
                         </configuration>
                     </execution>
                     <execution>
