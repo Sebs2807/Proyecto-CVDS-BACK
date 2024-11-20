@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import edu.eci.cvds.library.model.Ejemplar;
+import edu.eci.cvds.library.model.Libro;
+
 import java.util.Date;
 import java.util.Arrays;
-
-import edu.eci.cvds.Library.model.Ejemplar;
-import edu.eci.cvds.Library.model.Libro;
 
 @SpringBootTest
 class LibraryApplicationModelTests {

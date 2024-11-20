@@ -1,24 +1,23 @@
-package edu.eci.cvds.Library.service;
+package edu.eci.cvds.library.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
+import edu.eci.cvds.library.model.Libro;
+import edu.eci.cvds.library.repository.LibroRepository;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import edu.eci.cvds.Library.model.Libro;
-import edu.eci.cvds.Library.repository.LibroRepository;
-import jakarta.annotation.Generated;
 
 @Service
 public class LibroService {
 
-    @Autowired
     private LibroRepository libroRepository;
+
+    @Autowired
+    public LibroService(LibroRepository libroRepository) {
+        this.libroRepository = libroRepository;
+    }
 
     /**
      * Crea un nuevo libro en la base de datos.
@@ -67,20 +66,4 @@ public class LibroService {
     public Libro actualizarLibro(Libro libro) {
         return libroRepository.save(libro);
     }
-
-    // public void cargarLibrosDesdeJson(String rutaArchivo) {
-    //     ObjectMapper mapper = new ObjectMapper();
-    //     try {
-
-    //         List<Libro> libros = mapper.readValue(new File(rutaArchivo), new TypeReference<List<Libro>>() {
-    //         });
-
-    //         libroRepository.saveAll(libros);
-    //     } catch (IOException e) {
-
-    //         e.printStackTrace();
-    //         throw new RuntimeException("Error al cargar los libros desde el archivo JSON", e);
-    //     }
-    // }
-
 }

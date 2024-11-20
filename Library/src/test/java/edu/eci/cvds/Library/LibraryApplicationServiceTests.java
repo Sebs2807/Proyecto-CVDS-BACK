@@ -1,23 +1,21 @@
 package edu.eci.cvds.Library;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import edu.eci.cvds.library.model.Libro;
+import edu.eci.cvds.library.repository.LibroRepository;
+import edu.eci.cvds.library.service.*;
+
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.eci.cvds.Library.model.Libro;
-import edu.eci.cvds.Library.repository.LibroRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 
 import java.util.Optional;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
-import edu.eci.cvds.Library.service.*;
 
 class LibraryApplicationServiceTests {
 

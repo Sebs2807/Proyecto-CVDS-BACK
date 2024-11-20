@@ -22,7 +22,7 @@
         <sonar.organization>sebs2807</sonar.organization> <!-- Usar el nombre de tu organización -->
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-    <sonar.coverage.exclusions>**/LibraryApplication.class, **/CustomIntegerDeserializer.class, **/Ejemplar.class, **/LibroController.class</sonar.coverage.exclusions>    
+        <sonar.exclusions>**/LibraryApplication.class, **/CustomIntegerDeserializer.class, **/Ejemplar.class, **/LibroController.class</sonar.exclusions>    
     </properties>
     <dependencies>
         <dependency>

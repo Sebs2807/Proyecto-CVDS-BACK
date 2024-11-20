@@ -1,9 +1,8 @@
-package edu.eci.cvds.Library.repository;
+package edu.eci.cvds.library.repository;
 
-import edu.eci.cvds.Library.model.Libro;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import java.util.List;
+
+import edu.eci.cvds.library.model.Libro;
 
 public interface LibroRepository extends MongoRepository<Libro, String> {
-
 }
