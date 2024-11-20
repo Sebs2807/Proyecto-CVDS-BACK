@@ -8,11 +8,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import edu.eci.cvds.library.model.Ejemplar;
 import edu.eci.cvds.library.model.Libro;
+import edu.eci.cvds.library.*;
 
 import java.util.Date;
 import java.util.Arrays;
 
-@SpringBootTest
+@SpringBootTest(classes = LibraryApplication.class)
 class LibraryApplicationModelTests {
 
 	private Libro libro;
