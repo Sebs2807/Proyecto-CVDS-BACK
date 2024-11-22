@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Date;
 import java.util.Arrays;
 
-import edu.eci.cvds.Library.model.Ejemplar;
+import edu.eci.cvds.Library.model.Copy;
 import edu.eci.cvds.Library.model.Libro;
 
 @SpringBootTest
@@ -90,8 +90,8 @@ class LibraryApplicationModelTests {
 
 	@Test
 	void testSetGetEjemplares() {
-		Ejemplar ejemplar1 = new Ejemplar();
-		Ejemplar ejemplar2 = new Ejemplar();
+		Copy ejemplar1 = new Copy();
+		Copy ejemplar2 = new Copy();
 		libro.setEjemplares(Arrays.asList(ejemplar1, ejemplar2));
 		assertEquals(2, libro.getEjemplares().size());
 	}

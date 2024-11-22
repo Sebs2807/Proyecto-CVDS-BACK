@@ -6,12 +6,12 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 
 @Document(collection = "ejemplares")
-public class Ejemplar {
+public class Copy {
     @Id
     private String id;
     
     @DBRef
-    private Libro libro;
+    private Book book;
     
     private String codigoEjemplar;
     private String estado;
@@ -38,16 +38,16 @@ public class Ejemplar {
      * Obtiene el libro al que pertenece el ejemplar.
      * @return libro al que pertenece el ejemplar.
      */
-    public Libro getLibro() {
-        return libro;
+    public Book getLibro() {
+        return book;
     }
 
     /**
      * Asigna un libro al ejemplar.
      * @param libro Libro al que pertenece el ejemplar.
      */
-    public void setLibro(Libro libro) {
-        this.libro = libro;
+    public void setLibro(Book libro) {
+        this.book = libro;
     }
 
     /**

@@ -10,27 +10,28 @@ import java.util.Date;
 import java.util.List;
 
 @Document(collection = "libros")
-public class Libro {
+public class Book {
 
     @Id
     private String id;
     private String nombreLibro;
     private String autor;
-    private String coleccion;
     private String editor;
     @JsonDeserialize(using = CustomIntegerDeserializer.class)
     private Integer edicion;
     private String isbn;
-    private String nombreCategoria;
-    private String nombreSubcategoria;
     private String sinopsis;
     private Date fechaIngreso;
 
     @DBRef
-    private List<Ejemplar> ejemplares;
+    private List<Category> Categorias;
+    @DBRef
+    private List<Subcategory> Subcategorias;
+    @DBRef
+    private List<Copy> ejemplares;
 
     // Constructor vacío necesario para la deserialización
-    public Libro() {
+    public Book() {
     }
 
     /**
@@ -88,24 +89,6 @@ public class Libro {
     }
 
     /**
-     * Obtiene la colección a la que pertenece el libro.
-     * 
-     * @return la colección del libro.
-     */
-    public String getColeccion() {
-        return coleccion;
-    }
-
-    /**
-     * Establece la colección a la que pertenece el libro.
-     * 
-     * @param coleccion la colección del libro.
-     */
-    public void setColeccion(String coleccion) {
-        this.coleccion = coleccion;
-    }
-
-    /**
      * Obtiene el editor del libro.
      * 
      * @return el editor del libro.
@@ -160,42 +143,6 @@ public class Libro {
     }
 
     /**
-     * Obtiene el nombre de la categoría del libro.
-     * 
-     * @return el nombre de la categoría.
-     */
-    public String getNombreCategoria() {
-        return nombreCategoria;
-    }
-
-    /**
-     * Establece el nombre de la categoría del libro.
-     * 
-     * @param nombreCategoria el nombre de la categoría.
-     */
-    public void setNombreCategoria(String nombreCategoria) {
-        this.nombreCategoria = nombreCategoria;
-    }
-
-    /**
-     * Obtiene el nombre de la subcategoría del libro.
-     * 
-     * @return el nombre de la subcategoría.
-     */
-    public String getNombreSubcategoria() {
-        return nombreSubcategoria;
-    }
-
-    /**
-     * Establece el nombre de la subcategoría del libro.
-     * 
-     * @param nombreSubcategoria el nombre de la subcategoría.
-     */
-    public void setNombreSubcategoria(String nombreSubcategoria) {
-        this.nombreSubcategoria = nombreSubcategoria;
-    }
-
-    /**
      * Obtiene la sinopsis del libro.
      * 
      * @return la sinopsis del libro.
@@ -236,7 +183,7 @@ public class Libro {
      * 
      * @return la lista de ejemplares.
      */
-    public List<Ejemplar> getEjemplares() {
+    public List<Copy> getEjemplares() {
         return ejemplares;
     }
 
@@ -245,7 +192,7 @@ public class Libro {
      * 
      * @param ejemplares la lista de ejemplares.
      */
-    public void setEjemplares(List<Ejemplar> ejemplares) {
+    public void setEjemplares(List<Copy> ejemplares) {
         this.ejemplares = ejemplares;
     }
 }
