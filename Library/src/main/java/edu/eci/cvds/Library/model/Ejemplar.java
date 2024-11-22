@@ -1,4 +1,4 @@
-package edu.eci.cvds.library.model;
+package edu.eci.cvds.Library.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

@@ -1,4 +1,4 @@
-package edu.eci.cvds.library.configuration;
+package edu.eci.cvds.Library.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

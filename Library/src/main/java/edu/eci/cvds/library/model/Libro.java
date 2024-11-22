@@ -1,4 +1,4 @@
-package edu.eci.cvds.library.model;
+package edu.eci.cvds.Library.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,18 +16,19 @@ public class Libro {
     private String id;
     private String nombreLibro;
     private String autor;
-    private String coleccion;
     private String editor;
     @JsonDeserialize(using = CustomIntegerDeserializer.class)
     private Integer edicion;
     private String isbn;
-    private String nombreCategoria;
-    private String nombreSubcategoria;
     private String sinopsis;
     private Date fechaIngreso;
 
     @DBRef
-    private List<Ejemplar> ejemplares;
+    private List<Category> Categorias;
+    @DBRef
+    private List<Subcategory> Subcategorias;
+    @DBRef
+    private List<Ejemplar>ejemplares;
 
     // Constructor vacío necesario para la deserialización
     public Libro() {
@@ -88,24 +89,6 @@ public class Libro {
     }
 
     /**
-     * Obtiene la colección a la que pertenece el libro.
-     * 
-     * @return la colección del libro.
-     */
-    public String getColeccion() {
-        return coleccion;
-    }
-
-    /**
-     * Establece la colección a la que pertenece el libro.
-     * 
-     * @param coleccion la colección del libro.
-     */
-    public void setColeccion(String coleccion) {
-        this.coleccion = coleccion;
-    }
-
-    /**
      * Obtiene el editor del libro.
      * 
      * @return el editor del libro.
@@ -157,42 +140,6 @@ public class Libro {
      */
     public void setIsbn(String isbn) {
         this.isbn = isbn;
-    }
-
-    /**
-     * Obtiene el nombre de la categoría del libro.
-     * 
-     * @return el nombre de la categoría.
-     */
-    public String getNombreCategoria() {
-        return nombreCategoria;
-    }
-
-    /**
-     * Establece el nombre de la categoría del libro.
-     * 
-     * @param nombreCategoria el nombre de la categoría.
-     */
-    public void setNombreCategoria(String nombreCategoria) {
-        this.nombreCategoria = nombreCategoria;
-    }
-
-    /**
-     * Obtiene el nombre de la subcategoría del libro.
-     * 
-     * @return el nombre de la subcategoría.
-     */
-    public String getNombreSubcategoria() {
-        return nombreSubcategoria;
-    }
-
-    /**
-     * Establece el nombre de la subcategoría del libro.
-     * 
-     * @param nombreSubcategoria el nombre de la subcategoría.
-     */
-    public void setNombreSubcategoria(String nombreSubcategoria) {
-        this.nombreSubcategoria = nombreSubcategoria;
     }
 
     /**

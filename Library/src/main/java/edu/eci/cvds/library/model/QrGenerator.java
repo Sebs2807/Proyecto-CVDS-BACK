@@ -1,4 +1,4 @@
-package edu.eci.cvds.library.model;
+package edu.eci.cvds.Library.model;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;

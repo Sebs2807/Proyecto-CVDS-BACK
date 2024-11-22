@@ -7,16 +7,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import edu.eci.cvds.library.model.Ejemplar;
-import edu.eci.cvds.library.model.Libro;
-import edu.eci.cvds.library.model.QrGenerator;
-import edu.eci.cvds.library.*;
+import edu.eci.cvds.Library.model.Ejemplar;
+import edu.eci.cvds.Library.model.Libro;
+import edu.eci.cvds.Library.model.QrGenerator;
+import edu.eci.cvds.Library.*;
 import java.io.File;
 
 import java.util.Date;
 import java.util.Arrays;
 
-@SpringBootTest(classes = LibraryApplication.class)
+import edu.eci.cvds.Library.model.Libro;
+
+@SpringBootTest
 class LibraryApplicationModelTests {
 
 	private Libro libro;
@@ -45,12 +47,6 @@ class LibraryApplicationModelTests {
 	}
 
 	@Test
-	void testSetGetColeccion() {
-		libro.setColeccion("Clásicos");
-		assertEquals("Clásicos", libro.getColeccion());
-	}
-
-	@Test
 	void testSetGetEditor() {
 		libro.setEditor("Editorial XYZ");
 		assertEquals("Editorial XYZ", libro.getEditor());
@@ -66,18 +62,6 @@ class LibraryApplicationModelTests {
 	void testSetGetIsbn() {
 		libro.setIsbn("978-3-16-148410-0");
 		assertEquals("978-3-16-148410-0", libro.getIsbn());
-	}
-
-	@Test
-	void testSetGetNombreCategoria() {
-		libro.setNombreCategoria("Ficción");
-		assertEquals("Ficción", libro.getNombreCategoria());
-	}
-
-	@Test
-	void testSetGetNombreSubcategoria() {
-		libro.setNombreSubcategoria("Novela");
-		assertEquals("Novela", libro.getNombreSubcategoria());
 	}
 
 	@Test
