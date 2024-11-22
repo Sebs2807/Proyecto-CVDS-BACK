@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class QrGenerator {
     public void generadorQrBar(String inputData) {
         // Cambiar por el identificador del ejemplar
-        String data = "https://example.com"; // Nueva variable, no modifica el parámetro
+        String data = (inputData == null || inputData.isEmpty()) ? "https://example.com" : inputData;
 
         // Cambiar por la ruta donde se vayan a guardar los QR
         String qrFilePath = "qrcode.svg";

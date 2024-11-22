@@ -14,8 +14,12 @@ import java.util.Optional;
 @RequestMapping("/libros")
 public class LibroController {
 
-    @Autowired
     private LibroService libroService;
+
+    @Autowired
+    public LibroController(LibroService libroService) {
+        this.libroService = libroService;
+    }
 
     /**
      * Crea un nuevo libro.
@@ -92,8 +96,9 @@ public class LibroController {
     }
 
     // @PostMapping("/cargar-desde-json")
-    // public ResponseEntity<Void> cargarLibrosDesdeJson(@RequestParam String rutaArchivo) {
-    //     libroService.cargarLibrosDesdeJson(rutaArchivo);
-    //     return ResponseEntity.ok().build();
+    // public ResponseEntity<Void> cargarLibrosDesdeJson(@RequestParam String
+    // rutaArchivo) {
+    // libroService.cargarLibrosDesdeJson(rutaArchivo);
+    // return ResponseEntity.ok().build();
     // }
 }
