@@ -1,20 +1,25 @@
-package edu.eci.cvds.Library.controller;
+package edu.eci.cvds.library.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import edu.eci.cvds.library.model.Libro;
+import edu.eci.cvds.library.service.LibroService;
+
 import java.util.List;
 import java.util.Optional;
-
-import edu.eci.cvds.Library.model.Libro;
-import edu.eci.cvds.Library.service.LibroService;
 
 @RestController
 @RequestMapping("/libros")
 public class LibroController {
 
-    @Autowired
     private LibroService libroService;
+
+    @Autowired
+    public LibroController(LibroService libroService) {
+        this.libroService = libroService;
+    }
 
     /**
      * Crea un nuevo libro.
@@ -91,8 +96,9 @@ public class LibroController {
     }
 
     // @PostMapping("/cargar-desde-json")
-    // public ResponseEntity<Void> cargarLibrosDesdeJson(@RequestParam String rutaArchivo) {
-    //     libroService.cargarLibrosDesdeJson(rutaArchivo);
-    //     return ResponseEntity.ok().build();
+    // public ResponseEntity<Void> cargarLibrosDesdeJson(@RequestParam String
+    // rutaArchivo) {
+    // libroService.cargarLibrosDesdeJson(rutaArchivo);
+    // return ResponseEntity.ok().build();
     // }
 }

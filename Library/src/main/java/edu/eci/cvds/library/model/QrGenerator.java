@@ -1,4 +1,4 @@
-package edu.eci.cvds.Library.model;
+package edu.eci.cvds.library.model;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -15,15 +15,20 @@ import java.awt.geom.Rectangle2D;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class QrGenerator {
-    public void GeneradorQrBar(String Data) {
-        //cambiar por el identificador del ejemplar
-        Data = "https://example.com";
-        //cambiar por la ruta donde se vayan a guardar los qr
+    public void generadorQrBar(String inputData) {
+        // Cambiar por el identificador del ejemplar
+        String data = (inputData == null || inputData.isEmpty()) ? "https://example.com" : inputData;
+
+        // Cambiar por la ruta donde se vayan a guardar los QR
         String qrFilePath = "qrcode.svg";
-        // cambiar por la ruta donde se vayan a guardar los barcode
+        // Cambiar por la ruta donde se vayan a guardar los códigos de barras
         String barcodeFilePath = "barcode.svg";
+
+        Logger logger = Logger.getLogger(getClass().getName());
         int qrSize = 300;
         int barcodeWidth = 400;
         int barcodeHeight = 100;
@@ -31,17 +36,17 @@ public class QrGenerator {
         try {
             // Generar QR
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            BitMatrix qrMatrix = qrCodeWriter.encode(Data, BarcodeFormat.QR_CODE, qrSize, qrSize);
+            BitMatrix qrMatrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, qrSize, qrSize);
             generateSVG(qrMatrix, qrFilePath, qrSize, qrSize);
-            System.out.println("QR Code SVG generated at: " + qrFilePath);
+            logger.log(Level.INFO, () -> "QR Code SVG generated at: " + qrFilePath);
 
             // Generar código de barras
             Code128Writer barcodeWriter = new Code128Writer();
-            BitMatrix barcodeMatrix = barcodeWriter.encode(Data, BarcodeFormat.CODE_128, barcodeWidth, barcodeHeight);
+            BitMatrix barcodeMatrix = barcodeWriter.encode(data, BarcodeFormat.CODE_128, barcodeWidth, barcodeHeight);
             generateSVG(barcodeMatrix, barcodeFilePath, barcodeWidth, barcodeHeight);
-            System.out.println("Barcode SVG generated at: " + barcodeFilePath);
+            logger.log(Level.INFO, () -> "Barcode SVG generated at: " + barcodeFilePath);
         } catch (WriterException | IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error generating QR or Barcode", e);
         }
     }
 

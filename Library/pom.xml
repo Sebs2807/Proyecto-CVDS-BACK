@@ -19,10 +19,10 @@
         <java.version>17</java.version>
         <sonar.projectKey>Sebs2807_Proyecto-CVDS-BACK</sonar.projectKey>
         <sonar.projectName>Proyecto CVDS BACK</sonar.projectName>
-        <sonar.organization>sebs2807</sonar.organization> <!-- Usar el nombre de tu organización -->
+        <sonar.organization>sebs2807</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-    <sonar.coverage.exclusions>**/LibraryApplication.class, **/CustomIntegerDeserializer.class, **/Ejemplar.class, **/LibroController.class</sonar.coverage.exclusions>    
+        <sonar.exclusions>**/LibraryApplication.java, **/CustomIntegerDeserializer.java, **/Ejemplar.java, **/LibroController.java</sonar.exclusions>    
     </properties>
     <dependencies>
         <dependency>

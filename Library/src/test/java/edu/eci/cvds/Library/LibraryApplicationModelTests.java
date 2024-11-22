@@ -1,17 +1,22 @@
 package edu.eci.cvds.Library;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import edu.eci.cvds.library.model.Ejemplar;
+import edu.eci.cvds.library.model.Libro;
+import edu.eci.cvds.library.model.QrGenerator;
+import edu.eci.cvds.library.*;
+import java.io.File;
+
 import java.util.Date;
 import java.util.Arrays;
 
-import edu.eci.cvds.Library.model.Ejemplar;
-import edu.eci.cvds.Library.model.Libro;
-
-@SpringBootTest
+@SpringBootTest(classes = LibraryApplication.class)
 class LibraryApplicationModelTests {
 
 	private Libro libro;
@@ -96,4 +101,19 @@ class LibraryApplicationModelTests {
 		assertEquals(2, libro.getEjemplares().size());
 	}
 
+	@Test
+    void testGeneradorQrBar() {
+        QrGenerator qrGenerator = new QrGenerator();
+
+        qrGenerator.generadorQrBar("https://example.com");
+
+        File qrFile = new File("qrcode.svg");
+        File barcodeFile = new File("barcode.svg");
+
+        assertTrue(qrFile.exists(), "QR Code file should exist");
+        assertTrue(barcodeFile.exists(), "Barcode file should exist");
+
+        qrFile.delete();
+        barcodeFile.delete();
+    }
 }
