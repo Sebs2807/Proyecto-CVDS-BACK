@@ -24,9 +24,9 @@ public class Libro {
     private Date fechaIngreso;
 
     @DBRef
-    private List<Category> Categorias;
+    private List<Categoria> Categorias;
     @DBRef
-    private List<Subcategory> Subcategorias;
+    private List<Subcategoria> Subcategorias;
     @DBRef
     private List<Ejemplar>ejemplares;
 
