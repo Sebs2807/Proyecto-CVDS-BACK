@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Document(collection = "libros")
-public class Book {
+public class Libro {
 
     @Id
     private String id;
@@ -28,10 +28,10 @@ public class Book {
     @DBRef
     private List<Subcategory> Subcategorias;
     @DBRef
-    private List<Copy> ejemplares;
+    private List<Ejemplar>ejemplares;
 
     // Constructor vacío necesario para la deserialización
-    public Book() {
+    public Libro() {
     }
 
     /**
@@ -183,7 +183,7 @@ public class Book {
      * 
      * @return la lista de ejemplares.
      */
-    public List<Copy> getEjemplares() {
+    public List<Ejemplar> getEjemplares() {
         return ejemplares;
     }
 
@@ -192,7 +192,7 @@ public class Book {
      * 
      * @param ejemplares la lista de ejemplares.
      */
-    public void setEjemplares(List<Copy> ejemplares) {
+    public void setEjemplares(List<Ejemplar> ejemplares) {
         this.ejemplares = ejemplares;
     }
 }

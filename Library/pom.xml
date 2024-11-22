@@ -19,10 +19,10 @@
         <java.version>17</java.version>
         <sonar.projectKey>Sebs2807_Proyecto-CVDS-BACK</sonar.projectKey>
         <sonar.projectName>Proyecto CVDS BACK</sonar.projectName>
-        <sonar.organization>sebs2807</sonar.organization> <!-- Usar el nombre de tu organización -->
+        <sonar.organization>sebs2807</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-    <sonar.coverage.exclusions>**/LibraryApplication.class, **/CustomIntegerDeserializer.class, **/Ejemplar.class, **/LibroController.class</sonar.coverage.exclusions>    
+        <sonar.exclusions>**/LibraryApplication.java, **/CustomIntegerDeserializer.java, **/Ejemplar.java, **/LibroController.java</sonar.exclusions>    
     </properties>
     <dependencies>
         <dependency>
@@ -67,6 +67,26 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-svggen</artifactId>
+            <version>1.16</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-dom</artifactId>
+            <version>1.16</version>
         </dependency>
     </dependencies>
 

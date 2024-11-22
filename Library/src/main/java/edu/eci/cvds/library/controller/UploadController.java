@@ -2,8 +2,6 @@ package edu.eci.cvds.Library.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import edu.eci.cvds.Library.service.LectorService;
 import edu.eci.cvds.Library.service.UploadService;
 
 import org.springframework.beans.factory.annotation.Autowired;

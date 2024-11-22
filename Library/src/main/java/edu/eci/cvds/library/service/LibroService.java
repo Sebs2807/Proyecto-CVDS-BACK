@@ -12,8 +12,12 @@ import edu.eci.cvds.Library.repository.LibroRepository;
 @Service
 public class LibroService {
 
-    @Autowired
     private LibroRepository libroRepository;
+
+    @Autowired
+    public LibroService(LibroRepository libroRepository) {
+        this.libroRepository = libroRepository;
+    }
 
     /**
      * Crea un nuevo libro en la base de datos.
@@ -62,20 +66,4 @@ public class LibroService {
     public Libro actualizarLibro(Libro libro) {
         return libroRepository.save(libro);
     }
-
-    // public void cargarLibrosDesdeJson(String rutaArchivo) {
-    //     ObjectMapper mapper = new ObjectMapper();
-    //     try {
-
-    //         List<Libro> libros = mapper.readValue(new File(rutaArchivo), new TypeReference<List<Libro>>() {
-    //         });
-
-    //         libroRepository.saveAll(libros);
-    //     } catch (IOException e) {
-
-    //         e.printStackTrace();
-    //         throw new RuntimeException("Error al cargar los libros desde el archivo JSON", e);
-    //     }
-    // }
-
 }

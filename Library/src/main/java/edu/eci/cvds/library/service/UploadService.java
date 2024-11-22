@@ -9,7 +9,5 @@ import edu.eci.cvds.Library.model.Upload;
 @Service
 public class UploadService {
     
-    public ResponseEntity<String> UploadBooks(Upload upload, MultipartFile file){
-        
-    }
+
 }

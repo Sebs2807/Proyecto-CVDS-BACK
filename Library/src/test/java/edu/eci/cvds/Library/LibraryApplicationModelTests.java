@@ -1,14 +1,21 @@
 package edu.eci.cvds.Library;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import edu.eci.cvds.Library.model.Ejemplar;
+import edu.eci.cvds.Library.model.Libro;
+import edu.eci.cvds.Library.model.QrGenerator;
+import edu.eci.cvds.Library.*;
+import java.io.File;
+
 import java.util.Date;
 import java.util.Arrays;
 
-import edu.eci.cvds.Library.model.Copy;
 import edu.eci.cvds.Library.model.Libro;
 
 @SpringBootTest
@@ -40,12 +47,6 @@ class LibraryApplicationModelTests {
 	}
 
 	@Test
-	void testSetGetColeccion() {
-		libro.setColeccion("Clásicos");
-		assertEquals("Clásicos", libro.getColeccion());
-	}
-
-	@Test
 	void testSetGetEditor() {
 		libro.setEditor("Editorial XYZ");
 		assertEquals("Editorial XYZ", libro.getEditor());
@@ -64,18 +65,6 @@ class LibraryApplicationModelTests {
 	}
 
 	@Test
-	void testSetGetNombreCategoria() {
-		libro.setNombreCategoria("Ficción");
-		assertEquals("Ficción", libro.getNombreCategoria());
-	}
-
-	@Test
-	void testSetGetNombreSubcategoria() {
-		libro.setNombreSubcategoria("Novela");
-		assertEquals("Novela", libro.getNombreSubcategoria());
-	}
-
-	@Test
 	void testSetGetSinopsis() {
 		libro.setSinopsis("Un niño conoce a un aviador perdido en el desierto.");
 		assertEquals("Un niño conoce a un aviador perdido en el desierto.", libro.getSinopsis());
@@ -90,10 +79,25 @@ class LibraryApplicationModelTests {
 
 	@Test
 	void testSetGetEjemplares() {
-		Copy ejemplar1 = new Copy();
-		Copy ejemplar2 = new Copy();
+		Ejemplar ejemplar1 = new Ejemplar();
+		Ejemplar ejemplar2 = new Ejemplar();
 		libro.setEjemplares(Arrays.asList(ejemplar1, ejemplar2));
 		assertEquals(2, libro.getEjemplares().size());
 	}
 
+	@Test
+    void testGeneradorQrBar() {
+        QrGenerator qrGenerator = new QrGenerator();
+
+        qrGenerator.generadorQrBar("https://example.com");
+
+        File qrFile = new File("qrcode.svg");
+        File barcodeFile = new File("barcode.svg");
+
+        assertTrue(qrFile.exists(), "QR Code file should exist");
+        assertTrue(barcodeFile.exists(), "Barcode file should exist");
+
+        qrFile.delete();
+        barcodeFile.delete();
+    }
 }
