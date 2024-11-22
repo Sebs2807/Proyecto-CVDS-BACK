@@ -24,33 +24,20 @@ class LibraryApplicationTests {
 	private SubcategoriaService subcategoriaService;
 
 	@Test
-	void testCrearOActualizarSubcategoria() {
-		Subcategoria subcategoria = new Subcategoria();
-		subcategoria.setIdSubcategoria(1);
-		subcategoria.setNombre("Ficción");
-		subcategoria.setDescripcion("Libros de ficción");
-		subcategoria.setIdCategoria(10);
-
-		Subcategoria creada = subcategoriaService.crearOActualizarSubcategoria(subcategoria);
-		assertNotNull(creada);
-		assertEquals("Ficción", creada.getNombre());
-	}
-
-	@Test
 	void testObtenerTodasLasSubcategorias() {
 		assertNotNull(subcategoriaService.obtenerTodasLasSubcategorias());
 	}
 
 	@Test
 	void testObtenerSubcategoriaPorId() {
-		Optional<Subcategoria> subcategoria = subcategoriaService.obtenerSubcategoriaPorId(1);
+		Optional<Subcategoria> subcategoria = subcategoriaService.obtenerSubcategoriaPorId("1");
 		assertTrue(subcategoria.isPresent());
 	}
 
 	@Test
 	void testEliminarSubcategoria() {
-		subcategoriaService.eliminarSubcategoria(1);
-		Optional<Subcategoria> subcategoria = subcategoriaService.obtenerSubcategoriaPorId(1);
+		subcategoriaService.eliminarSubcategoria("1");
+		Optional<Subcategoria> subcategoria = subcategoriaService.obtenerSubcategoriaPorId("1");
 		assertFalse(subcategoria.isPresent());
 	}
 

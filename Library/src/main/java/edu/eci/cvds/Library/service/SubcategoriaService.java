@@ -39,7 +39,7 @@ public class SubcategoriaService {
    * @param idSubcategoria ID de la subcategoría a buscar.
    * @return un Optional con la subcategoría encontrada o vacío si no existe.
    */
-  public Optional<Subcategoria> obtenerSubcategoriaPorId(Integer idSubcategoria) {
+  public Optional<Subcategoria> obtenerSubcategoriaPorId(String idSubcategoria) {
     return subcategoriaRepository.findById(idSubcategoria);
   }
 
@@ -48,7 +48,7 @@ public class SubcategoriaService {
    * 
    * @param idSubcategoria ID de la subcategoría a eliminar.
    */
-  public void eliminarSubcategoria(Integer idSubcategoria) {
+  public void eliminarSubcategoria(String idSubcategoria) {
     subcategoriaRepository.deleteById(idSubcategoria);
   }
 }
