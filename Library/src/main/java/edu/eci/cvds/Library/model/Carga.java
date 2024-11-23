@@ -1,103 +1,110 @@
 package edu.eci.cvds.Library.model;
 
 public class Carga {
-    private char nombreLibro;
-    private char autor;
-    private char editorial;
-    private char edicion;
-    private char isbn;
-    private char estadoFisico;
-    private char sinopsis;
-    private char subcategoria;
-    private char categoria;
-    private char disponibilidad;
-    private char anioPublicacion;
+    private String nombreLibro;
+    private String autor;
+    private String editorial;
+    private String edicion;
+    private String isbn;
+    private String estadoFisico;
+    private String sinopsis;
+    private String subcategoria;
+    private String categoria;
+    private String disponibilidad;
+    private String anioPublicacion;
 
-    public char getNombreLibro() {
+    public String getNombreLibro() {
         return nombreLibro;
     }
 
-    public char getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public char getEditorial() {
+    public String getEditorial() {
         return editorial;
     }
 
-    public char getEdicion() {
+    public String getEdicion() {
         return edicion;
     }
 
-    public char getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public char getDisponibilidad() {
+    public String getDisponibilidad() {
         return disponibilidad;
     }
 
-    public char getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public char getEstadoFisico() {
+    public String getEstadoFisico() {
         return estadoFisico;
     }
 
-    public char getSubcategoria() {
+    public String getSubcategoria() {
         return subcategoria;
     }
 
-    public char getSinopsis() {
+    public String getSinopsis() {
         return sinopsis;
     }
 
-    public char getAnioPublicacion() {
+    public String getAnioPublicacion() {
         return anioPublicacion;
     }
 
-    public void setNombreLibro(char nombreLibro) {
+    public void setNombreLibro(String nombreLibro) {
         this.nombreLibro = nombreLibro;
     }
 
-    public void setAutor(char autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
-    public void setEditorial(char editorial) {
+    public void setEditorial(String editorial) {
         this.editorial = editorial;
     }
 
-    public void setEdicion(char edicion) {
+    public void setEdicion(String edicion) {
         this.edicion = edicion;
     }
 
-    public void setIsbn(char isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    public void setDisponibilidad(char disponibilidad) {
+    public void setDisponibilidad(String disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
 
-    public void setCategoria(char categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
-    public void setEstadoFisico(char estadoFisico) {
+    public void setEstadoFisico(String estadoFisico) {
         this.estadoFisico = estadoFisico;
     }
 
-    public void setSubcategoria(char subcategoria) {
+    public void setSubcategoria(String subcategoria) {
         this.subcategoria = subcategoria;
     }
 
-    public void setSinopsis(char sinopsis) {
+    public void setSinopsis(String sinopsis) {
         this.sinopsis = sinopsis;
     }
 
-    public void setAnioPublicacion(char anioPublicacion) {
+    public void setAnioPublicacion(String anioPublicacion) {
         this.anioPublicacion = anioPublicacion;
+    }
+
+    public static int letraAIndice(String letra) {
+        if (letra.length() != 1 || letra.charAt(0) < 'A' || letra.charAt(0) > 'Z') {
+            throw new IllegalArgumentException("La letra debe ser una letra de la A a la Z.");
+        }
+        return letra.charAt(0) - 'A';
     }
 }
