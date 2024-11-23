@@ -7,4 +7,5 @@ import edu.eci.cvds.Library.model.Categoria;
 
 public interface CategoriaRepository extends MongoRepository<Categoria, String> {
 
+
 }

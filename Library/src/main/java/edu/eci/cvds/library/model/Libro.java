@@ -23,15 +23,35 @@ public class Libro {
     private String sinopsis;
     private Date fechaIngreso;
 
-    @DBRef
+    @DBRef(lazy = false)
     private List<Categoria> Categorias;
-    @DBRef
+    @DBRef(lazy = false)
     private List<Subcategoria> Subcategorias;
-    @DBRef
+    @DBRef(lazy = false)
     private List<Ejemplar>ejemplares;
 
     // Constructor vacío necesario para la deserialización
     public Libro() {
+    }   
+
+    /**
+     * Obtiene las categorías del libro.
+     * 
+     * @return una lista de categorías a las que pertenece el libro.
+     */
+
+    public List<Categoria> getCategorias() {
+        return Categorias;
+    }
+
+    /**
+     * Obtiene las subcategorías del libro.
+     * 
+     * @return una lista de subcategorías a las que pertenece el libro.
+     */
+
+    public List<Subcategoria> getSubcategorias() {
+        return Subcategorias;
     }
 
     /**
@@ -195,4 +215,19 @@ public class Libro {
     public void setEjemplares(List<Ejemplar> ejemplares) {
         this.ejemplares = ejemplares;
     }
+
+    /**
+     * Busca dentro de la lista de categorias si existe aguna con ese nombre de categoria.
+     * 
+     * @param nombreCategoria nombre de la categoria a buscar.
+     */
+    public boolean findCategoria(String nombreCategoria) {
+        for (Categoria c : Categorias) {
+            if (c.getNombre().equals(nombreCategoria)) {
+                return true;  // Encuentra la categoría y termina el método inmediatamente
+            }
+        }
+        return false;  // Si no se encuentra ninguna coincidencia, retorna false
+    }
+    
 }
