@@ -10,13 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import edu.eci.cvds.Library.model.Ejemplar;
 import edu.eci.cvds.Library.model.Libro;
 import edu.eci.cvds.Library.model.QrGenerator;
-import edu.eci.cvds.Library.*;
 import java.io.File;
 
 import java.util.Date;
 import java.util.Arrays;
-
-import edu.eci.cvds.Library.model.Libro;
 
 @SpringBootTest
 class LibraryApplicationModelTests {

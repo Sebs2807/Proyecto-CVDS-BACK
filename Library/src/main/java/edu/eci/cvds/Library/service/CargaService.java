@@ -40,7 +40,12 @@ public class CargaService {
 
             if (queryLibro != null){
                 Cell categoriaCell = row.getCell(Carga.letraAIndice(carga.getCategoria()));
-                String categoria = categoriaCell != null ? categoriaCell.getStringCellValue() : null;
+                String categoriaABuscar = categoriaCell != null ? categoriaCell.getStringCellValue() : null;
+
+                if(!queryLibro.findCategoria(categoriaABuscar)){
+                    Categoria categoria = new Categoria(categoriaABuscar);
+                    queryLibro.addCategoria(categoria);
+                }
             }
 
             // Agregar más celdas según lo necesites...

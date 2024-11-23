@@ -15,7 +15,8 @@ public class Categoria {
 	@DBRef
 	private List<Subcategoria> subcategorias;
 
-	public Categoria() {
+	public Categoria(String nombre) {
+		this.nombre = nombre;
 	}
 
 	// Getters and Setters
@@ -31,11 +32,4 @@ public class Categoria {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public void setIdCategoria(String idCategoria) {
-		this.idCategoria = idCategoria;
-	}
 }

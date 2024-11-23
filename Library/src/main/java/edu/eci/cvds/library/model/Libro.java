@@ -24,7 +24,7 @@ public class Libro {
     private Date fechaIngreso;
 
     @DBRef(lazy = false)
-    private List<Categoria> Categorias;
+    private List<Categoria> categorias;
     @DBRef(lazy = false)
     private List<Subcategoria> Subcategorias;
     @DBRef(lazy = false)
@@ -41,7 +41,7 @@ public class Libro {
      */
 
     public List<Categoria> getCategorias() {
-        return Categorias;
+        return categorias;
     }
 
     /**
@@ -222,12 +222,21 @@ public class Libro {
      * @param nombreCategoria nombre de la categoria a buscar.
      */
     public boolean findCategoria(String nombreCategoria) {
-        for (Categoria c : Categorias) {
+        for (Categoria c : categorias) {
             if (c.getNombre().equals(nombreCategoria)) {
-                return true;  // Encuentra la categoría y termina el método inmediatamente
+                return true;  
             }
         }
-        return false;  // Si no se encuentra ninguna coincidencia, retorna false
+        return false;  
+    }
+
+    /**
+     * Adiciona una nueva categoria a la lista de categorias.
+     * 
+     * @param categoria categoria que va ser adicionada.
+     */
+    public void addCategoria(Categoria categoria){
+        this.categorias.add(categoria);
     }
     
 }
