@@ -7,11 +7,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Optional;
 import org.springframework.boot.test.context.SpringBootTest;
+import edu.eci.cvds.library.*;
 
 import edu.eci.cvds.library.model.Subcategoria;
 import edu.eci.cvds.library.service.SubcategoriaService;
 
-@SpringBootTest
+@SpringBootTest(classes = LibraryApplication.class)
 class LibraryApplicationTests {
 
 	@Test

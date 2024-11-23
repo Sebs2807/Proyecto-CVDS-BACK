@@ -16,9 +16,8 @@ import java.io.File;
 import java.util.Date;
 import java.util.Arrays;
 
-import edu.eci.cvds.library.model.Libro;
 
-@SpringBootTest
+@SpringBootTest(classes = LibraryApplication.class)
 class LibraryApplicationModelTests {
 
 	private Libro libro;
