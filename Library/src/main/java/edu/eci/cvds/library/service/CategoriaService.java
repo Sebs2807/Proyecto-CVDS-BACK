@@ -1,12 +1,12 @@
-package edu.eci.cvds.Library.service;
+package edu.eci.cvds.library.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import edu.eci.cvds.Library.model.Categoria;
-import edu.eci.cvds.Library.repository.CategoriaRepository;
+import edu.eci.cvds.library.model.Categoria;
+import edu.eci.cvds.library.repository.CategoriaRepository;
 
 @Service
 public class CategoriaService {

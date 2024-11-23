@@ -1,4 +1,4 @@
-package edu.eci.cvds.Library.model;
+package edu.eci.cvds.library.model;
 
 import java.util.List;
 

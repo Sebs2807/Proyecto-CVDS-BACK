@@ -1,4 +1,4 @@
-package edu.eci.cvds.Library.controller;
+package edu.eci.cvds.library.controller;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.eci.cvds.Library.model.Carga;
-import edu.eci.cvds.Library.service.CargaService;
+import edu.eci.cvds.library.model.Carga;
+import edu.eci.cvds.library.service.CargaService;
 
 import java.io.IOException;
 import java.util.Iterator;

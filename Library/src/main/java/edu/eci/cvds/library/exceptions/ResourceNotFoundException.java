@@ -1,4 +1,4 @@
-package edu.eci.cvds.Library.exceptions;
+package edu.eci.cvds.library.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
     private Long resourceId;

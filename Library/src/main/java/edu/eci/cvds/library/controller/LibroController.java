@@ -1,11 +1,11 @@
-package edu.eci.cvds.Library.controller;
+package edu.eci.cvds.library.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import edu.eci.cvds.Library.model.Libro;
-import edu.eci.cvds.Library.service.LibroService;
+import edu.eci.cvds.library.model.Libro;
+import edu.eci.cvds.library.service.LibroService;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,10 +1,10 @@
-package edu.eci.cvds.Library.repository;
+package edu.eci.cvds.library.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import edu.eci.cvds.Library.model.Libro;
+import edu.eci.cvds.library.model.Libro;
 
 
 @Repository

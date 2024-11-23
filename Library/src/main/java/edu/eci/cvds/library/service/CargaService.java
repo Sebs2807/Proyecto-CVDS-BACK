@@ -1,12 +1,12 @@
-package edu.eci.cvds.Library.service;
+package edu.eci.cvds.library.service;
 
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Service;
 
-import edu.eci.cvds.Library.model.Carga;
-import edu.eci.cvds.Library.model.Categoria;
-import edu.eci.cvds.Library.model.Libro;
-import edu.eci.cvds.Library.repository.LibroRepository;
+import edu.eci.cvds.library.model.Carga;
+import edu.eci.cvds.library.model.Categoria;
+import edu.eci.cvds.library.model.Libro;
+import edu.eci.cvds.library.repository.LibroRepository;
 
 import java.util.Iterator;
 import java.util.List;

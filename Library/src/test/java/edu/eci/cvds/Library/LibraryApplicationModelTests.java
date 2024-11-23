@@ -7,16 +7,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import edu.eci.cvds.Library.model.Ejemplar;
-import edu.eci.cvds.Library.model.Libro;
-import edu.eci.cvds.Library.model.QrGenerator;
-import edu.eci.cvds.Library.*;
+import edu.eci.cvds.library.model.Ejemplar;
+import edu.eci.cvds.library.model.Libro;
+import edu.eci.cvds.library.model.QrGenerator;
+import edu.eci.cvds.library.*;
 import java.io.File;
 
 import java.util.Date;
 import java.util.Arrays;
 
-import edu.eci.cvds.Library.model.Libro;
+import edu.eci.cvds.library.model.Libro;
 
 @SpringBootTest
 class LibraryApplicationModelTests {

@@ -1,4 +1,4 @@
-package edu.eci.cvds.Library.model;
+package edu.eci.cvds.library.model;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -9,7 +9,7 @@ import io.jsonwebtoken.security.Keys;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 
-import edu.eci.cvds.Library.exceptions.AccessDeniedException;
+import edu.eci.cvds.library.exceptions.AccessDeniedException;
 
 public class JwtUtils {
 

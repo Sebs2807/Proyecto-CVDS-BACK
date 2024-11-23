@@ -1,14 +1,14 @@
 package edu.eci.cvds.Library;
 
-import edu.eci.cvds.Library.model.Libro;
-import edu.eci.cvds.Library.repository.LibroRepository;
-import edu.eci.cvds.Library.service.*;
+import edu.eci.cvds.library.model.Libro;
+import edu.eci.cvds.library.repository.LibroRepository;
+import edu.eci.cvds.library.service.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.boot.test.context.SpringBootTest;
-import edu.eci.cvds.Library.*;
+import edu.eci.cvds.library.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
