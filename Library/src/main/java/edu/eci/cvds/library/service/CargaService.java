@@ -4,12 +4,10 @@ import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Service;
 
 import edu.eci.cvds.library.model.Carga;
-import edu.eci.cvds.library.model.Categoria;
 import edu.eci.cvds.library.model.Libro;
 import edu.eci.cvds.library.repository.LibroRepository;
 
 import java.util.Iterator;
-import java.util.List;
 
 @Service
 public class CargaService {
@@ -17,10 +15,10 @@ public class CargaService {
     public void cargarExcel(Sheet sheet, Carga carga) {
         // Iterar sobre las filas del archivo
         Iterator<Row> rowIterator = sheet.iterator();
-        
+
         // Salta la primera fila si es el encabezado (opcional)
         if (rowIterator.hasNext()) {
-            rowIterator.next();  // Salta la fila de encabezados si es necesario
+            rowIterator.next(); // Salta la fila de encabezados si es necesario
         }
 
         while (rowIterator.hasNext()) {
@@ -38,7 +36,7 @@ public class CargaService {
 
             Libro queryLibro = LibroRepository.buscarPorCualquierCampo(nombreLibro, autor, editorial, edicion);
 
-            if (queryLibro != null){
+            if (queryLibro != null) {
                 Cell categoriaCell = row.getCell(Carga.letraAIndice(carga.getCategoria()));
                 String categoria = categoriaCell != null ? categoriaCell.getStringCellValue() : null;
             }
@@ -55,7 +53,6 @@ public class CargaService {
                 String author = authorCell.toString();
                 System.out.println("Autor: " + author);
             }
-
 
             // Procesa las celdas adicionales de acuerdo con la configuración
             // Por ejemplo, podrías almacenar los valores en una base de datos

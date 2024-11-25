@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Date;
@@ -24,14 +25,17 @@ public class Libro {
     private Date fechaIngreso;
 
     @DBRef(lazy = false)
-    private List<Categoria> Categorias;
+    private List<Categoria> categorias;
     @DBRef(lazy = false)
-    private List<Subcategoria> Subcategorias;
+    private List<Subcategoria> subcategorias;
     @DBRef(lazy = false)
     private List<Ejemplar>ejemplares;
 
-    // Constructor vacío necesario para la deserialización
+    /**
+     * Constructor de la clase libro
+     */
     public Libro() {
+      // Necesario para deserealizar correctamente
     }   
 
     /**
@@ -41,7 +45,7 @@ public class Libro {
      */
 
     public List<Categoria> getCategorias() {
-        return Categorias;
+        return categorias;
     }
 
     /**
@@ -51,7 +55,7 @@ public class Libro {
      */
 
     public List<Subcategoria> getSubcategorias() {
-        return Subcategorias;
+        return subcategorias;
     }
 
     /**
@@ -222,7 +226,7 @@ public class Libro {
      * @param nombreCategoria nombre de la categoria a buscar.
      */
     public boolean findCategoria(String nombreCategoria) {
-        for (Categoria c : Categorias) {
+        for (Categoria c : categorias) {
             if (c.getNombre().equals(nombreCategoria)) {
                 return true;  // Encuentra la categoría y termina el método inmediatamente
             }
