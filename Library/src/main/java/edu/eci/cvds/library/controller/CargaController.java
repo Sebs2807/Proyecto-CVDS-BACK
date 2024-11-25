@@ -15,14 +15,17 @@ import edu.eci.cvds.library.model.Carga;
 import edu.eci.cvds.library.service.CargaService;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 @RestController
 @RequestMapping("/cargas")
 public class CargaController {
     
-    @Autowired
     private CargaService cargaService;
+
+    @Autowired
+    public CargaController(CargaService cargaService){
+        this.cargaService = cargaService;
+    }
 
     @PostMapping("/multiple")
     public ResponseEntity<String> cargarArchivo(@RequestParam("file") MultipartFile file, @RequestBody Carga configCarga) {

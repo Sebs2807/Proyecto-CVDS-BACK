@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import edu.eci.cvds.library.model.Libro;
 import edu.eci.cvds.library.service.LibroService;
 
@@ -27,6 +29,7 @@ public class LibroController {
      * @param libro Objeto libro a crear.
      * @return ResponseEntity con el libro creado.
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Libro> crearLibro(@RequestBody Libro libro) {
         return ResponseEntity.ok(libroService.crearLibro(libro));
@@ -37,6 +40,7 @@ public class LibroController {
      * 
      * @return ResponseEntity con la lista de todos los libros.
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping
     public ResponseEntity<List<Libro>> obtenerTodosLosLibros() {
         return ResponseEntity.ok(libroService.obtenerTodosLosLibros());
@@ -65,6 +69,7 @@ public class LibroController {
      * @param id ID del libro a eliminar.
      * @return ResponseEntity sin contenido si se elimina exitosamente.
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarLibro(@PathVariable String id) {
         libroService.eliminarLibro(id);
@@ -78,6 +83,7 @@ public class LibroController {
      * @param libro Objeto libro con los datos actualizados.
      * @return ResponseEntity con el libro actualizado o 404 si no se encuentra.
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Libro> actualizarLibro(@PathVariable String id, @RequestBody Libro libro) {
         Optional<Libro> libroExistente = libroService.obtenerLibroPorId(id);
