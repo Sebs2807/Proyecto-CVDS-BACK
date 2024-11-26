@@ -8,6 +8,8 @@ import com.google.zxing.oned.Code128Writer;
 
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
@@ -15,6 +17,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

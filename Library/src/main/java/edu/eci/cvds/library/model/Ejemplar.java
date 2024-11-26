@@ -19,6 +19,12 @@ public class Ejemplar {
     private String codigoQR;
 
     /**
+     * Constructor vacío (necesario para deserialización).
+     */
+    public Ejemplar() {
+    }
+
+    /**
      * Obtiene el ID del ejemplar.
      * @return ID del ejemplar.
      */
