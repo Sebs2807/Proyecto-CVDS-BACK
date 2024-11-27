@@ -1,4 +1,4 @@
-package edu.eci.cvds.Library;
+package edu.eci.cvds.library;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

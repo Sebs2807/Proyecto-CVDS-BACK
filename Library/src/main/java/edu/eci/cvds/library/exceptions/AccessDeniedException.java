@@ -1,4 +1,4 @@
-package edu.eci.cvds.Library.exceptions;
+package edu.eci.cvds.library.exceptions;
 
 public class AccessDeniedException extends RuntimeException {
     public AccessDeniedException(String message) {

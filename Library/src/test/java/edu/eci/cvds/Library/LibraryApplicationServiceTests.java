@@ -1,14 +1,14 @@
 package edu.eci.cvds.Library;
 
-import edu.eci.cvds.Library.model.Libro;
-import edu.eci.cvds.Library.repository.LibroRepository;
-import edu.eci.cvds.Library.service.*;
+import edu.eci.cvds.library.model.Libro;
+import edu.eci.cvds.library.repository.LibroRepository;
+import edu.eci.cvds.library.service.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.boot.test.context.SpringBootTest;
-import edu.eci.cvds.Library.*;
+import edu.eci.cvds.library.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.Arrays;
 import java.util.List;
 
-@SpringBootTest(classes = LibraryApplication.class)
+@SpringBootTest(classes = {LibraryApplication.class})
 class LibraryApplicationServiceTests {
 
     @Mock
@@ -34,11 +34,11 @@ class LibraryApplicationServiceTests {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        libro1 = new Libro();
+        libro1 = new Libro("hola mundo", "Santiago Diaz", "Norma", "1", "123456xx", "La historia de un programador", "2005");;
         libro1.setId("1");
         libro1.setNombreLibro("Libro Uno");
 
-        libro2 = new Libro();
+        libro2 = new Libro("hola mundo", "Santiago Diaz", "Norma", "1", "123456xx", "La historia de un programador", "2005");;
         libro2.setId("2");
         libro2.setNombreLibro("Libro Dos");
     }

@@ -1,4 +1,4 @@
-package edu.eci.cvds.Library.exceptions;
+package edu.eci.cvds.library.exceptions;
 
 public class InvalidInputException extends RuntimeException {
     public InvalidInputException(String message) {
