@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: 'target/Tasks-0.0.1-SNAPSHOT.jar' 
+          path: 'target/Library-0.0.1-SNAPSHOT.jar'
 
       - name: List files in target directory
         run: ls -al ./Library/target
@@ -47,7 +47,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: java-app
-          path: 'target/Tasks-0.0.1-SNAPSHOT.jar' 
+          path: 'target/Library-0.0.1-SNAPSHOT.jar'
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -62,4 +62,4 @@ jobs:
         with:
           app-name: 'BackBibliosoft'
           slot-name: 'Production'
-          package: 'target/Tasks-0.0.1-SNAPSHOT.jar'
+          package: 'target/Library-0.0.1-SNAPSHOT.jar'
