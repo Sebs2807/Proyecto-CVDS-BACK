@@ -47,8 +47,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: java-app
-          path: 'target/Library-0.0.1-SNAPSHOT.jar'
-      
+
+      - name: List files after downloading artifact
+        run: ls -al
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -62,4 +64,4 @@ jobs:
         with:
           app-name: 'BackBibliosoft'
           slot-name: 'Production'
-          package: 'target/Library-0.0.1-SNAPSHOT.jar'
+          package: 'Library-0.0.1-SNAPSHOT.jar'  # No necesita la ruta completa de target/
