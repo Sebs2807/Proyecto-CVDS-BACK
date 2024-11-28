@@ -1,7 +1,6 @@
 package edu.eci.cvds.library.controller;
 
 import edu.eci.cvds.library.model.Ejemplar;
-import edu.eci.cvds.library.model.Libro;
 import edu.eci.cvds.library.service.EjemplarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
