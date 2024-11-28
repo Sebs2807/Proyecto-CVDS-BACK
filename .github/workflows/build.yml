@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - develop
+      - "feature/*"
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -38,4 +39,3 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Sebs2807_Proyecto-CVDS-BACK -Dsonar.host.url=https://sonarcloud.io
         working-directory: ./Library
-
