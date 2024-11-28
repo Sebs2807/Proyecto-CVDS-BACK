@@ -30,7 +30,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: 'target/Library-0.0.1-SNAPSHOT.jar'
+          path: './Library/target/Library-0.0.1-SNAPSHOT.jar' 
+
 
       - name: List files in target directory
         run: ls -al ./Library/target
