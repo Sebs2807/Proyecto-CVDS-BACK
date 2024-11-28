@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 import edu.eci.cvds.library.model.Subcategoria;
 import edu.eci.cvds.library.repository.SubcategoriaRepository;
 
@@ -46,6 +47,10 @@ public class SubcategoriaService {
 	public Optional<Subcategoria> obtenerSubcategoriaPorId(String idSubcategoria) {
 		return subcategoriaRepository.findById(idSubcategoria);
 	}
+
+	public Subcategoria obtenerSubcategoriaPorNombre(String nombreSubcategoria) {
+        return subcategoriaRepository.findSubcategoriaByNombre(nombreSubcategoria);
+    }
 
 	/**
 	 * Elimina una subcategoría por su ID.

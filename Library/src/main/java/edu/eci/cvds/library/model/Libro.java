@@ -3,12 +3,9 @@ package edu.eci.cvds.library.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
+
 
 @Document(collection = "libros")
 public class Libro {
@@ -18,11 +15,10 @@ public class Libro {
     private String nombreLibro;
     private String autor;
     private String editor;
-    @JsonDeserialize(using = CustomIntegerDeserializer.class)
-    private Integer edicion;
+    private String edicion;
     private String isbn;
     private String sinopsis;
-    private Date fechaIngreso;
+    private String anioPublicacion;
 
     @DBRef(lazy = false)
     private List<Categoria> categorias;
@@ -31,11 +27,18 @@ public class Libro {
     @DBRef(lazy = false)
     private List<Ejemplar>ejemplares;
 
-    /**
-     * Constructor de la clase libro
-     */
-    public Libro() {
-      // Necesario para deserealizar correctamente
+    // Constructor vacío necesario para la deserialización
+    public Libro(String nombreLibro, String autor, String editor, String edicion, String isbn, String sinopsis, String anioPublicacion) {
+        this.nombreLibro = nombreLibro;
+        this.autor = autor;
+        this.editor = editor;
+        this.edicion = edicion;
+        this.isbn = isbn;
+        this.sinopsis = sinopsis;
+        this.anioPublicacion = anioPublicacion;
+        categorias = new ArrayList<>();
+        subcategorias = new ArrayList<>();
+        ejemplares = new ArrayList<>();
     }   
 
     /**
@@ -135,7 +138,7 @@ public class Libro {
      * 
      * @return la edición del libro.
      */
-    public Integer getEdicion() {
+    public String getEdicion() {
         return edicion;
     }
 
@@ -144,7 +147,7 @@ public class Libro {
      * 
      * @param edicion la edición del libro.
      */
-    public void setEdicion(Integer edicion) {
+    public void setEdicion(String edicion) {
         this.edicion = edicion;
     }
 
@@ -185,24 +188,6 @@ public class Libro {
     }
 
     /**
-     * Obtiene la fecha de ingreso del libro.
-     * 
-     * @return la fecha de ingreso.
-     */
-    public Date getFechaIngreso() {
-        return fechaIngreso;
-    }
-
-    /**
-     * Establece la fecha de ingreso del libro.
-     * 
-     * @param fechaIngreso la fecha de ingreso.
-     */
-    public void setFechaIngreso(Date fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
-    }
-
-    /**
      * Obtiene la lista de ejemplares asociados al libro.
      * 
      * @return la lista de ejemplares.
@@ -225,13 +210,75 @@ public class Libro {
      * 
      * @param nombreCategoria nombre de la categoria a buscar.
      */
-    public boolean findCategoria(String nombreCategoria) {
+    public Categoria findCategoria(String nombreCategoria) {
         for (Categoria c : categorias) {
             if (c.getNombre().equals(nombreCategoria)) {
-                return true;  // Encuentra la categoría y termina el método inmediatamente
+                return c;  
             }
         }
-        return false;  // Si no se encuentra ninguna coincidencia, retorna false
+        return null;  
+    }
+
+    /**
+     * Busca dentro de la lista de categorias si existe aguna con ese nombre de categoria.
+     * 
+     * @param nombreCategoria booleano que indica si existe o no.
+     */
+    public boolean haveCategoria(String nombreCategoria) {
+        for (Categoria c : categorias) {
+            if (c.getNombre().equals(nombreCategoria)) {
+                return true;  
+            }
+        }
+        return false;  
+    }
+
+    /**
+     * Adiciona una nueva categoria a la lista de categorias.
+     * 
+     * @param categoria categoria que va ser adicionada.
+     */
+    public void addCategoria(Categoria categoria){
+        this.categorias.add(categoria);
+    }
+
+    /**
+     * Adiciona un nuevo ejemplar a la lista de de ejemplares.
+     * 
+     * @param categoria ejemplar que va ser adicionado.
+     */
+    public void addEjemplar(Ejemplar ejemplar){
+        this.ejemplares.add(ejemplar);
+    }
+
+    /**
+     * Busca dentro de la lista de subcategorias si existe aguna con ese nombre de la subcategoria.
+     * 
+     * @param nombreSubcategoria booleano que indica si existe o no.
+     */
+    public boolean haveSubcategoria(String nombreSubcategoria) {
+        for (Subcategoria c : subcategorias) {
+            if (c.getNombre().equals(nombreSubcategoria)) {
+                return true;  
+            }
+        }
+        return false;  
+    }
+
+    /**
+     * Adiciona una nueva subcategoria a la lista de subcategorias.
+     * 
+     * @param subcategoria suncategoria que va ser adicionada.
+     */
+    public void addSubcategoria(Subcategoria subcategoria){
+        this.subcategorias.add(subcategoria);
     }
     
+    public String getAnioPublicacion() {
+        return anioPublicacion;
+    }
+
+    public void setAnioPublicacion(String anioPublicacion) {
+        this.anioPublicacion = anioPublicacion;
+    }
 }

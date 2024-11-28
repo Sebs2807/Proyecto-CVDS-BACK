@@ -2,24 +2,35 @@ package edu.eci.cvds.library.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 
-
+/**
+ * Representa un ejemplar físico de un libro dentro del sistema de gestión de biblioteca.
+ * Cada ejemplar tiene un estado físico, un identificador único, y detalles adicionales como disponibilidad y códigos de identificación.
+ */
 @Document(collection = "ejemplares")
 public class Ejemplar {
     @Id
-    private String id;
-    
-    @DBRef
-    private Libro libro;
-    
-    private String codigoEjemplar;
-    private String estado;
-    private boolean disponible;
-    private String codigoQR;
+    private String id; // Identificador único del ejemplar.
+    private String estado; // Estado físico del ejemplar (e.g., "Nuevo", "Usado", "Dañado").
+    private boolean disponible; // Indica si el ejemplar está disponible para préstamo.
+    private String codigoBarras; // Código de barras asociado al ejemplar.
+
+    /**
+     * Constructor que inicializa un ejemplar con su estado físico y disponibilidad.
+     * 
+     * @param estado Estado físico del ejemplar.
+     * @param disponible Disponibilidad del ejemplar (true si está disponible, false en caso contrario).
+     */
+    public Ejemplar(String estado, boolean disponible) {
+        this.estado = estado;
+        this.disponible = disponible;
+    }
+
+    // Getters y Setters
 
     /**
      * Obtiene el ID del ejemplar.
+     * 
      * @return ID del ejemplar.
      */
     public String getId() {
@@ -28,6 +39,7 @@ public class Ejemplar {
 
     /**
      * Asigna un ID al ejemplar.
+     * 
      * @param id ID del ejemplar.
      */
     public void setId(String id) {
@@ -35,40 +47,9 @@ public class Ejemplar {
     }
 
     /**
-     * Obtiene el libro al que pertenece el ejemplar.
-     * @return libro al que pertenece el ejemplar.
-     */
-    public Libro getLibro() {
-        return libro;
-    }
-
-    /**
-     * Asigna un libro al ejemplar.
-     * @param libro Libro al que pertenece el ejemplar.
-     */
-    public void setLibro(Libro libro) {
-        this.libro = libro;
-    }
-
-    /**
-     * Obtiene el código del ejemplar.
-     * @return código del ejemplar.
-     */
-    public String getCodigoEjemplar() {
-        return codigoEjemplar;
-    }
-
-    /**
-     * Asigna un código al ejemplar.
-     * @param codigoEjemplar Código del ejemplar.
-     */
-    public void setCodigoEjemplar(String codigoEjemplar) {
-        this.codigoEjemplar = codigoEjemplar;
-    }
-
-    /**
      * Obtiene el estado del ejemplar.
-     * @return estado del ejemplar.
+     * 
+     * @return Estado físico del ejemplar.
      */
     public String getEstado() {
         return estado;
@@ -76,7 +57,8 @@ public class Ejemplar {
 
     /**
      * Asigna un estado al ejemplar.
-     * @param estado Estado del ejemplar.
+     * 
+     * @param estado Estado físico del ejemplar.
      */
     public void setEstado(String estado) {
         this.estado = estado;
@@ -84,6 +66,7 @@ public class Ejemplar {
 
     /**
      * Verifica si el ejemplar está disponible.
+     * 
      * @return true si el ejemplar está disponible, false en caso contrario.
      */
     public boolean isDisponible() {
@@ -92,6 +75,7 @@ public class Ejemplar {
 
     /**
      * Asigna la disponibilidad del ejemplar.
+     * 
      * @param disponible true si el ejemplar está disponible, false en caso contrario.
      */
     public void setDisponible(boolean disponible) {
@@ -99,18 +83,16 @@ public class Ejemplar {
     }
 
     /**
-     * Obtiene el código QR del ejemplar.
-     * @return código QR del ejemplar.
+     * Obtiene el código de barras del ejemplar.
+     * 
+     * @return Código de barras del ejemplar.
      */
-    public String getCodigoQR() {
-        return codigoQR;
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
-    /**
-     * Asigna un código QR al ejemplar.
-     * @param codigoQR Código QR del ejemplar.
-     */
-    public void setCodigoQR(String codigoQR) {
-        this.codigoQR = codigoQR;
+    public void setCodigoBarras(String direccionURL){
+        this.codigoBarras = direccionURL;
     }
+
 }

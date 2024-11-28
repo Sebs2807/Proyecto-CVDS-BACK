@@ -1,47 +1,74 @@
 package edu.eci.cvds.library.model;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * Representa una subcategoría dentro del sistema de gestión de biblioteca.
+ * Esta clase es mapeada a un documento en la colección "subcategorias" de MongoDB.
+ * Cada subcategoría está asociada con un nombre y un identificador único.
+ * 
+ * @author [Tu Nombre]
+ */
 @Document(collection = "subcategorias")
 public class Subcategoria {
 
-	@Id
-	private String idSubcategoria;
-	private String nombre;
-	@DBRef
-	private List<Categoria> categorias;
+    /**
+     * El identificador único de la subcategoría en la base de datos.
+     */
+    @Id
+    private String idSubcategoria;
 
-	// Constructor vacío (necesario para deserialización)
-	public Subcategoria() {
-	}
+    /**
+     * El nombre de la subcategoría, que es una descripción del tipo de libros que contiene.
+     */
+    private String nombre;
 
-	// Getters and Setters
+    /**
+     * Constructor que inicializa el nombre de la subcategoría.
+     * Este constructor es utilizado principalmente para la deserialización.
+     * 
+     * @param nombre El nombre de la subcategoría.
+     */
+    public Subcategoria(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getIdSubcategoria() {
-		return idSubcategoria;
-	}
+    // Getters and Setters
 
-	public void setSubcategoria(String idSubcategoria) {
-		this.idSubcategoria = idSubcategoria;
-	}
+    /**
+     * Obtiene el identificador único de la subcategoría.
+     * 
+     * @return El identificador único de la subcategoría.
+     */
+    public String getIdSubcategoria() {
+        return idSubcategoria;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    /**
+     * Asigna el identificador único de la subcategoría.
+     * 
+     * @param idSubcategoria El identificador único de la subcategoría.
+     */
+    public void setSubcategoria(String idSubcategoria) {
+        this.idSubcategoria = idSubcategoria;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    /**
+     * Obtiene el nombre de la subcategoría.
+     * 
+     * @return El nombre de la subcategoría.
+     */
+    public String getNombre() {
+        return nombre;
+    }
 
-	public List<Categoria> getIdCategoria() {
-		return categorias;
-	}
-
-	public void setIdCategoria(Categoria Categoria) {
-		categorias.add(Categoria);
-	}
+    /**
+     * Asigna el nombre a la subcategoría.
+     * 
+     * @param nombre El nombre de la subcategoría.
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

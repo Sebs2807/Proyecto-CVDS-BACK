@@ -8,6 +8,9 @@ import java.util.Optional;
 import edu.eci.cvds.library.model.Categoria;
 import edu.eci.cvds.library.repository.CategoriaRepository;
 
+/**
+ * Servicio que maneja toda la logica de manejo de las categorias.
+ */
 @Service
 public class CategoriaService {
 
@@ -20,8 +23,8 @@ public class CategoriaService {
      * @param categoria Objeto categoría a crear o actualizar.
      * @return la categoría creada o actualizada.
      */
-    public Categoria crearOActualizarCategoria(Categoria subcategoria) {
-        return categoriaRepository.save(subcategoria);
+    public Categoria crearOActualizarCategoria(Categoria categoria) {
+        return categoriaRepository.save(categoria);
     }
 
     /**
@@ -41,6 +44,10 @@ public class CategoriaService {
      */
     public Optional<Categoria> obtenerCategoriaPorId(String idCategoria) {
         return categoriaRepository.findById(idCategoria);
+    }
+
+    public Categoria obtenerCategoriaPorNombre(String nombreCategoria) {
+        return categoriaRepository.findCategoriaByNombre(nombreCategoria);
     }
 
     /**
