@@ -96,6 +96,42 @@ public class LibroController {
         }
     }
 
+    /**
+     * Obtiene un libro por su nombre.
+     * 
+     * @param nombre Nombre del libro a buscar.
+     * @return ResponseEntity con la lista de libros encontrados.
+     */
+    @GetMapping("/buscar/nombre/{nombre}")
+    public ResponseEntity<List<Libro>> obtenerLibrosPorNombre(@PathVariable String nombre) {
+        List<Libro> libros = libroService.obtenerLibrosPorNombre(nombre);
+        return ResponseEntity.ok(libros);
+    }
+
+    /**
+     * Obtiene libros por el autor.
+     * 
+     * @param autor Nombre del autor a buscar.
+     * @return ResponseEntity con la lista de libros encontrados.
+     */
+    @GetMapping("/buscar/autor/{autor}")
+    public ResponseEntity<List<Libro>> obtenerLibrosPorAutor(@PathVariable String autor) {
+        List<Libro> libros = libroService.obtenerLibrosPorAutor(autor);
+        return ResponseEntity.ok(libros);
+    }
+
+    /**
+     * Obtiene un libro por su ISBN.
+     * 
+     * @param isbn ISBN del libro a buscar.
+     * @return ResponseEntity con el libro encontrado o 404 si no existe.
+     */
+    @GetMapping("/buscar/isbn/{isbn}")
+    public ResponseEntity<Libro> obtenerLibroPorIsbn(@PathVariable String isbn) {
+        Optional<Libro> libro = libroService.obtenerLibroPorIsbn(isbn);
+        return libro.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/test")
     public String testEndpoint() {
         return "El endpoint está funcionando.";

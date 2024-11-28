@@ -8,7 +8,6 @@ import java.util.Optional;
 import edu.eci.cvds.library.model.Libro;
 import edu.eci.cvds.library.repository.LibroRepository;
 
-
 @Service
 public class LibroService {
 
@@ -65,5 +64,35 @@ public class LibroService {
      */
     public Libro actualizarLibro(Libro libro) {
         return libroRepository.save(libro);
+    }
+
+    /**
+     * Obtiene todos los libros buscando por el nombre del mismo
+     * 
+     * @param nombre nombre del libro a buscar
+     * @return Lista de todos los libros filtrados por nombre
+     */
+    public List<Libro> obtenerLibrosPorNombre(String nombre) {
+        return libroRepository.findByNombreLibroContainingIgnoreCase(nombre);
+    }
+
+    /**
+     * Obtiene todos los libros filtrados por autor
+     * 
+     * @param autor autor del libro a buscar
+     * @return Lista de todos los libros filtrados por autores
+     */
+    public List<Libro> obtenerLibrosPorAutor(String autor) {
+        return libroRepository.findByAutorContainingIgnoreCase(autor);
+    }
+
+    /**
+     * Obtiene todos los libros filtrados por isbn
+     * 
+     * @param isbn isbn del libro a buscar
+     * @return Un Optional con el libro que corresponde al isbn de parámetro
+     */
+    public Optional<Libro> obtenerLibroPorIsbn(String isbn) {
+        return libroRepository.findByIsbn(isbn);
     }
 }
