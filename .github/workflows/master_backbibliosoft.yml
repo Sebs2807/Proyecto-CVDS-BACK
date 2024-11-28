@@ -12,8 +12,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: List repository files
-        run: ls -R
+        with:
+          fetch-depth: 0
+
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
@@ -22,13 +23,16 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
-        working-directory: ./Library # Especifica el directorio donde está el pom.xml
+        working-directory: ./Library
+
+      - name: Verify JAR file
+        run: ls -l ./Library/target
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: './Library/target/*.jar' # Ajusta la ruta al archivo JAR generado
+          path: './Library/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
@@ -37,13 +41,16 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # Esto es requerido para solicitar el JWT
+      id-token: write
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
+
+      - name: List downloaded files
+        run: ls -l
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -58,4 +65,4 @@ jobs:
         with:
           app-name: 'BackBibliosoft'
           slot-name: 'Production'
-          package: './Library/target/*.jar' # Cambia según la ubicación del JAR generado
+          package: './Library/target/*.jar'
