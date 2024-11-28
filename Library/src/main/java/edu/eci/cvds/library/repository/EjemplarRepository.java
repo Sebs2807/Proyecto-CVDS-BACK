@@ -1,5 +1,7 @@
 package edu.eci.cvds.library.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import edu.eci.cvds.library.model.Ejemplar;
@@ -13,6 +15,8 @@ import edu.eci.cvds.library.model.Ejemplar;
  */
 @Repository
 public interface EjemplarRepository extends MongoRepository<Ejemplar, String> {
-    // Este repositorio hereda automáticamente métodos CRUD de MongoRepository.
-    // No es necesario definir ningún método adicional a menos que se necesite lógica personalizada.
+    /**
+     * @return Lista de ejemplares disponibles.
+     */
+    List<Ejemplar> findByDisponibleTrue();
 }

@@ -1,5 +1,8 @@
 package edu.eci.cvds.library.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +50,52 @@ public class EjemplarService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /**
+     * Obtiene todos los ejemplares.
+     *
+     * @return Lista de ejemplares.
+     */
+    public List<Ejemplar> obtenerTodosLosEjemplares() {
+        return ejemplarRepository.findAll();
+    }
+
+    /**
+     * Obtiene un ejemplar por su ID.
+     *
+     * @param id ID del ejemplar.
+     * @return Optional con el ejemplar encontrado o vacío si no existe.
+     */
+    public Optional<Ejemplar> obtenerEjemplarPorId(String id) {
+        return ejemplarRepository.findById(id);
+    }
+
+    /**
+     * Elimina un ejemplar por su ID.
+     *
+     * @param id ID del ejemplar a eliminar.
+     */
+    public void eliminarEjemplar(String id) {
+        ejemplarRepository.deleteById(id);
+    }
+
+    /**
+     * Actualiza un ejemplar existente.
+     *
+     * @param ejemplar Ejemplar con datos actualizados.
+     * @return Ejemplar actualizado.
+     */
+    public Ejemplar actualizarEjemplar(Ejemplar ejemplar) {
+        return ejemplarRepository.save(ejemplar);
+    }
+
+    /**
+     * Obtiene todos los ejemplares disponibles.
+     *
+     * @return Lista de ejemplares disponibles.
+     */
+    public List<Ejemplar> obtenerEjemplaresDisponibles() {
+        return ejemplarRepository.findByDisponibleTrue();
     }
 }
