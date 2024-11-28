@@ -21,13 +21,13 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
-        working-directory: /Library
+        working-directory: ./Library # Especifica el directorio donde está el pom.xml
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: './Library/target/*.jar' # Ajustar el path al subdirectorio correcto
+          path: './Library/target/*.jar' # Ajusta la ruta al archivo JAR generado
 
   deploy:
     runs-on: ubuntu-latest
@@ -57,4 +57,4 @@ jobs:
         with:
           app-name: 'BackBibliosoft'
           slot-name: 'Production'
-          package: '*.jar'
+          package: './Library/target/*.jar' # Cambia según la ubicación del JAR generado
