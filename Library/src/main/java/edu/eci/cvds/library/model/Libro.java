@@ -274,4 +274,11 @@ public class Libro {
         this.subcategorias.add(subcategoria);
     }
     
+    public String getAnioPublicacion() {
+        return anioPublicacion;
+    }
+
+    public void setAnioPublicacion(String anioPublicacion) {
+        this.anioPublicacion = anioPublicacion;
+    }
 }
