@@ -22,7 +22,10 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
         working-directory: ./Library
-
+        
+      - name: List files in target directory
+        run: ls -al ./Library/target  # Asegúrate de listar los archivos en la carpeta 'target/'
+        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
