@@ -9,7 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Clase que representa una categoría en el sistema de gestión de biblioteca.
- * Cada categoría tiene un identificador único, un nombre, y una lista de subcategorías asociadas.
+ * Cada categoría tiene un identificador único, un nombre, y una lista de
+ * subcategorías asociadas.
  * Se utiliza la integración con MongoDB para el almacenamiento de los datos.
  */
 @Document(collection = "categorias")
@@ -17,7 +18,7 @@ public class Categoria {
 
     @Id
     private String idCategoria; // Identificador único de la categoría en la base de datos.
-    private String nombre;      // Nombre de la categoría.
+    private String nombre; // Nombre de la categoría.
 
     @DBRef(lazy = false)
     private List<Subcategoria> subcategorias; // Lista de subcategorías asociadas a esta categoría.
@@ -54,7 +55,8 @@ public class Categoria {
     }
 
     /**
-     * Agrega una subcategoría a la lista de subcategorías asociadas a esta categoría.
+     * Agrega una subcategoría a la lista de subcategorías asociadas a esta
+     * categoría.
      * 
      * @param subcategoria Subcategoría a agregar.
      */
@@ -67,7 +69,8 @@ public class Categoria {
      * especificado.
      * 
      * @param nombreSubcategoria Nombre de la subcategoría a buscar.
-     * @return {@code true} si la subcategoría existe, {@code false} en caso contrario.
+     * @return {@code true} si la subcategoría existe, {@code false} en caso
+     *         contrario.
      */
     public boolean findSubcategoria(String nombreSubcategoria) {
         for (Subcategoria c : subcategorias) {
@@ -79,11 +82,20 @@ public class Categoria {
     }
 
     /**
-     * Agrega una subcategoría a la lista de subcategorías asociadas a esta categoría.
+     * Agrega una subcategoría a la lista de subcategorías asociadas a esta
+     * categoría.
      * 
      * @param idSubcategoria Subcategoría a agregar.
      */
     public void setSubcategorias(Subcategoria idSubcategoria) {
         subcategorias.add(idSubcategoria);
+    }
+
+    public void setIdCategoria(String idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public List<Subcategoria> getSubcategorias() {
+        return subcategorias;
     }
 }

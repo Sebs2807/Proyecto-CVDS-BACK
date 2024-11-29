@@ -30,16 +30,16 @@ public class CargaService {
     /**
      * Constructor que inicializa los servicios y repositorios necesarios.
      *
-     * @param categoriaService   Servicio para manejar categorías.
+     * @param categoriaService    Servicio para manejar categorías.
      * @param subcategoriaService Servicio para manejar subcategorías.
      * @param ejemplarService     Servicio para manejar ejemplares.
      * @param libroService        Servicio para manejar libros.
      * @param libroRepository     Repositorio para acceso a libros.
      */
     @Autowired
-    public CargaService(CategoriaService categoriaService, SubcategoriaService subcategoriaService, 
-                        EjemplarService ejemplarService, LibroService libroService, 
-                        LibroRepository libroRepository) {
+    public CargaService(CategoriaService categoriaService, SubcategoriaService subcategoriaService,
+            EjemplarService ejemplarService, LibroService libroService,
+            LibroRepository libroRepository) {
         this.categoriaService = categoriaService;
         this.subcategoriaService = subcategoriaService;
         this.ejemplarService = ejemplarService;
@@ -74,7 +74,7 @@ public class CargaService {
      * @param carga Configuración de las columnas.
      * @throws IOException Si ocurre un error al procesar la fila.
      */
-    private void procesarFila(Row row, Carga carga) throws IOException {
+    public void procesarFila(Row row, Carga carga) throws IOException {
         String nombreLibro = getCellValue(row, carga.getNombreLibro());
         String autor = getCellValue(row, carga.getAutor());
         String editorial = getCellValue(row, carga.getEditorial());
@@ -100,7 +100,7 @@ public class CargaService {
      * @param carga Configuración de las columnas.
      * @return `true` si el ejemplar está disponible; de lo contrario, `false`.
      */
-    private boolean determinarDisponibilidad(Row row, Carga carga) {
+    public boolean determinarDisponibilidad(Row row, Carga carga) {
         String disponibilidadStr = getCellValue(row, carga.getDisponibilidad());
         return disponibilidadStr != null && !disponibilidadStr.trim().isEmpty();
     }
@@ -117,8 +117,8 @@ public class CargaService {
      * @param anioPublicacion Año de publicación del libro.
      * @return Objeto `Libro` existente o recién creado.
      */
-    private Libro obtenerOActualizarLibro(String nombre, String autor, String editorial, String edicion, 
-                                          String isbn, String sinopsis, String anioPublicacion) {
+    public Libro obtenerOActualizarLibro(String nombre, String autor, String editorial, String edicion,
+            String isbn, String sinopsis, String anioPublicacion) {
         List<Libro> libros = libroRepository.buscarPorCualquierCampo(nombre, autor, editorial, edicion);
 
         if (libros != null && !libros.isEmpty()) {
@@ -136,7 +136,7 @@ public class CargaService {
      * @param categoriaNombre Nombre de la categoría.
      * @return Objeto `Categoria` existente o recién creado.
      */
-    private Categoria manejarCategoria(String categoriaNombre) {
+    public Categoria manejarCategoria(String categoriaNombre) {
         if (categoriaNombre == null || categoriaNombre.trim().isEmpty()) {
             return null;
         }
@@ -150,13 +150,14 @@ public class CargaService {
     }
 
     /**
-     * Maneja la obtención o creación de una subcategoría y la asocia con su categoría.
+     * Maneja la obtención o creación de una subcategoría y la asocia con su
+     * categoría.
      *
      * @param subcategoriaNombre Nombre de la subcategoría.
      * @param categoria          Categoría asociada.
      * @return Objeto `Subcategoria` existente o recién creado.
      */
-    private Subcategoria manejarSubcategoria(String subcategoriaNombre, Categoria categoria) {
+    public Subcategoria manejarSubcategoria(String subcategoriaNombre, Categoria categoria) {
         if (subcategoriaNombre == null || subcategoriaNombre.trim().isEmpty()) {
             return null;
         }
@@ -168,7 +169,7 @@ public class CargaService {
         }
 
         if (categoria != null) {
-            if (categoria.findSubcategoria(subcategoria.getNombre())){
+            if (categoria.findSubcategoria(subcategoria.getNombre())) {
                 return subcategoria;
             }
             categoria.addSubcategoria(subcategoria);
@@ -181,11 +182,11 @@ public class CargaService {
     /**
      * Asocia una categoría y subcategoría con un libro.
      *
-     * @param libro       Objeto `Libro` al que se asociarán.
-     * @param categoria   Categoría a asociar.
+     * @param libro        Objeto `Libro` al que se asociarán.
+     * @param categoria    Categoría a asociar.
      * @param subcategoria Subcategoría a asociar.
      */
-    private void asociarCategoriaYSubcategoria(Libro libro, Categoria categoria, Subcategoria subcategoria) {
+    public void asociarCategoriaYSubcategoria(Libro libro, Categoria categoria, Subcategoria subcategoria) {
         if (categoria != null && !libro.haveCategoria(categoria.getNombre())) {
             libro.addCategoria(categoria);
         }
@@ -198,12 +199,12 @@ public class CargaService {
     /**
      * Agrega un ejemplar a un libro.
      *
-     * @param libro         Objeto `Libro` al que se agregará el ejemplar.
-     * @param estadoFisico  Estado físico del ejemplar.
-     * @param disponible    Disponibilidad del ejemplar.
+     * @param libro        Objeto `Libro` al que se agregará el ejemplar.
+     * @param estadoFisico Estado físico del ejemplar.
+     * @param disponible   Disponibilidad del ejemplar.
      * @throws IOException Si ocurre un error al guardar el ejemplar.
      */
-    private void agregarEjemplar(Libro libro, String estadoFisico, boolean disponible) throws IOException {
+    public void agregarEjemplar(Libro libro, String estadoFisico, boolean disponible) throws IOException {
         Ejemplar ejemplar = new Ejemplar(estadoFisico, disponible);
         ejemplarService.crearOActualizarEjemplar(ejemplar);
         libro.addEjemplar(ejemplar);
@@ -217,7 +218,7 @@ public class CargaService {
      * @param columnLetter Letra de la columna correspondiente.
      * @return Valor de la celda como cadena de texto.
      */
-    private String getCellValue(Row row, String columnLetter) {
+    public String getCellValue(Row row, String columnLetter) {
         Cell cell = row.getCell(Carga.letraAIndice(columnLetter));
         return cell != null ? cell.toString().trim() : null;
     }
