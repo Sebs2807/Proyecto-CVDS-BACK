@@ -1,0 +1,71 @@
+name: Build and deploy JAR app to Azure Web App - BackBibliosoft
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java version
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'microsoft'
+
+      - name: Build with Maven
+        run: mvn clean install
+        working-directory: ./Library
+        
+      - name: List files in target directory
+        run: ls -al ./Library/target  # Asegúrate de listar los archivos en la carpeta 'target/'
+        
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-app
+          path: './Library/target/Library-0.0.1-SNAPSHOT.jar' 
+
+
+      - name: List files in target directory
+        run: ls -al ./Library/target
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write 
+  
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: java-app
+
+      - name: List files after downloading artifact
+        run: ls -al
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_343DB11E79AA416BB6F39219938803BA }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6516FD78483F45838686ED2ABA554816 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A17C23F4A0C046CC8D87DC6909FA6279 }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'BackBibliosoft'
+          slot-name: 'Production'
+          package: 'Library-0.0.1-SNAPSHOT.jar'  # No necesita la ruta completa de target/
