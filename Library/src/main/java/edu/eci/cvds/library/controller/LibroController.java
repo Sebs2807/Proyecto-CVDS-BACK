@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/libros")
+@PreAuthorize("hasRole('ADMIN')")
 public class LibroController {
 
     private LibroService libroService;
@@ -132,11 +133,4 @@ public class LibroController {
     public String testEndpoint() {
         return "El endpoint está funcionando.";
     }
-
-    // @PostMapping("/cargar-desde-json")
-    // public ResponseEntity<Void> cargarLibrosDesdeJson(@RequestParam String
-    // rutaArchivo) {
-    // libroService.cargarLibrosDesdeJson(rutaArchivo);
-    // return ResponseEntity.ok().build();
-    // }
 }

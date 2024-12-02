@@ -1,11 +1,10 @@
 package edu.eci.cvds.library.model;
 
-import org.springframework.stereotype.Component;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.oned.Code128Writer;
+import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -23,6 +22,7 @@ public class CodeGenerator {
      * @param inputData Datos de entrada para el código de barras.
      * @return InputStream del código de barras en formato SVG.
      * @throws IOException Si ocurre un error al procesar el formato SVG.
+     * @throws WriterException Si ocurre un error al generar el código de barras.
      */
 
     public ByteArrayInputStream generarCodigoBarrasPngStream(String inputData) throws IOException, WriterException {

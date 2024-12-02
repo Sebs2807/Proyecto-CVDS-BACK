@@ -304,7 +304,7 @@ class LibraryApplicationModelTests {
 	}
 
 	@Test
-	void testGenerarCodigoBarrasPngStream() {
+	void testGenerarCodigoBarrasSvgStream() {
 		CodeGenerator codeGenerator = new CodeGenerator();
 		String inputData = "1234567890";
 
