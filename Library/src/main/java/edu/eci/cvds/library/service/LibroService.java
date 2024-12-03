@@ -1,6 +1,12 @@
 package edu.eci.cvds.library.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +16,9 @@ import edu.eci.cvds.library.repository.LibroRepository;
 
 @Service
 public class LibroService {
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     private LibroRepository libroRepository;
 
@@ -94,5 +103,17 @@ public class LibroService {
      */
     public Optional<Libro> obtenerLibroPorIsbn(String isbn) {
         return libroRepository.findByIsbn(isbn);
+    }
+
+    public Page<Libro> findByFieldWithRegexExcluding(String fieldName, String regex, Pageable pageable) {
+        Criteria criteria = Criteria.where(fieldName).regex(regex, "i"); 
+        Query query = new Query(criteria).with(pageable); 
+        
+        // Excluir los campos isbn y sinopsis
+        query.fields().exclude("categorias").exclude("subcategorias").exclude("ejemplares");
+        List<Libro> libros = mongoTemplate.find(query, Libro.class);
+        long total = mongoTemplate.count(query, Libro.class); 
+
+        return new PageImpl<>(libros, pageable, total);
     }
 }

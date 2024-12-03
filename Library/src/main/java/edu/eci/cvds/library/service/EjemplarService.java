@@ -6,9 +6,12 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import edu.eci.cvds.library.model.Ejemplar;
+import edu.eci.cvds.library.model.Libro;
 import edu.eci.cvds.library.repository.EjemplarRepository;
 
 /**
@@ -137,5 +140,9 @@ public class EjemplarService {
         ejemplarRepository.save(ejemplar);
 
         return true;
+    }
+
+    public Page<Libro> findById(String idEjemplar, Pageable pageable) {
+        return(ejemplarRepository.findByIdEjemplar(idEjemplar, pageable));
     }
 }
