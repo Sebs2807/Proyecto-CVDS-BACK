@@ -20,11 +20,11 @@ public class Libro {
     private String sinopsis;
     private String anioPublicacion;
 
-    @DBRef(lazy = false)
+    @DBRef(lazy = true)
     private List<Categoria> categorias;
-    @DBRef(lazy = false)
+    @DBRef(lazy = true)
     private List<Subcategoria> subcategorias;
-    @DBRef(lazy = false)
+    @DBRef(lazy = true)
     private List<Ejemplar>ejemplares;
 
     // Constructor vacío necesario para la deserialización
