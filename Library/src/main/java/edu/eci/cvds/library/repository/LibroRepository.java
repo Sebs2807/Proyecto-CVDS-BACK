@@ -1,5 +1,7 @@
 package edu.eci.cvds.library.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -42,4 +44,8 @@ public interface LibroRepository extends MongoRepository<Libro, String> {
     List<Libro> findByAutorContainingIgnoreCase(String autor);
 
     Optional<Libro> findByIsbn(String isbn);
+
+    @Query(value = "{' ?0 ': { $regex: ?1, $options: 'i' }}", 
+    fields = "{'id': 1, 'nombreLibro': 1, 'autor': 1, 'editor': 1, 'edicion': 1, 'isbn': 1, 'sinopsis': 1, 'anioPublicacion': 1}")
+    Page<Libro> findByFieldWithRegex(String fieldName, String regex, Pageable pageable);
 }

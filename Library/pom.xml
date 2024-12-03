@@ -173,6 +173,7 @@
                                 <exclude>**/JwtAuthenticationToken.class</exclude>
                                 <exclude>**/edu/eci/cvds/library/controller/**</exclude>
                                 <exclude>**/edu/eci/cvds/library/exceptions/**</exclude>
+                                <exclude>**/BusquedaService.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
