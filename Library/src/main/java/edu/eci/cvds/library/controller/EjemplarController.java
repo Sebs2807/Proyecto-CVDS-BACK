@@ -4,14 +4,17 @@ import edu.eci.cvds.library.model.Ejemplar;
 import edu.eci.cvds.library.service.EjemplarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/ejemplares")
+@PreAuthorize("hasRole('ADMIN')")
 public class EjemplarController {
 
     private final EjemplarService ejemplarService;
@@ -47,6 +50,12 @@ public class EjemplarController {
     public ResponseEntity<List<Ejemplar>> ejemplaresDisponibles() {
         return ResponseEntity.ok(ejemplarService.obtenerEjemplaresDisponibles());
     }
+
+    @PostMapping("/singular")
+    public ResponseEntity<Ejemplar> nuevoEjemplar(@RequestBody Ejemplar ejemplar) {
+        return ResponseEntity.ok(ejemplarService.crearOActualizarEjemplar(ejemplar));
+    }
+    
 
     /**
      * @param id Identificador único del ejemplar a eliminar.
