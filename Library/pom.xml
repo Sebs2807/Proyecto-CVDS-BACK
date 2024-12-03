@@ -165,9 +165,12 @@
                             <excludes>
                                 <exclude>**/LibraryApplication.class</exclude>
                                 <exclude>**/CustomIntegerDeserializer.class</exclude>
-                                <exclude>**/Ejemplar.class</exclude>
                                 <exclude>**/LibroController.class</exclude>
+                                <exclude>**/EjemplarService.class</exclude>
+                                <exclude>**/CargaService.class</exclude>
                                 <exclude>**/AzureBlobStorageService.class</exclude>
+                                <exclude>**/JwtFilter.class</exclude>
+                                <exclude>**/JwtAuthenticationToken.class</exclude>
                                 <exclude>**/edu/eci/cvds/library/controller/**</exclude>
                                 <exclude>**/edu/eci/cvds/library/exceptions/**</exclude>
                             </excludes>

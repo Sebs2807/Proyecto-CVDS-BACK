@@ -8,9 +8,19 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.google.zxing.WriterException;
@@ -22,10 +32,17 @@ import edu.eci.cvds.library.model.CodeGenerator;
 import edu.eci.cvds.library.model.Ejemplar;
 import edu.eci.cvds.library.model.Libro;
 import edu.eci.cvds.library.model.Subcategoria;
+import edu.eci.cvds.library.repository.EjemplarRepository;
+import edu.eci.cvds.library.service.AzureBlobStorageService;
+import edu.eci.cvds.library.service.EjemplarService;
 import edu.eci.cvds.library.*;
 
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @SpringBootTest(classes = LibraryApplication.class)
 class LibraryApplicationModelTests {
@@ -393,4 +410,60 @@ class LibraryApplicationModelTests {
 		libro1.setSinopsis("Una sinopsis interesante del libro.");
 		assertEquals("Una sinopsis interesante del libro.", libro1.getSinopsis());
 	}
+
+	private Ejemplar ejemplar;
+
+    @BeforeEach
+    public void setUpEjemplar() {
+        ejemplar = new Ejemplar("Nuevo", true);  // Crea un ejemplar con estado "Nuevo" y disponible
+        ejemplar.setId("1");  // Asigna un ID de ejemplo
+    }
+	
+    // Verificar la asignación y obtención del estado
+    @Test
+    void testSetGetEstado() {
+        ejemplar.setEstado("Dañado");
+        assertEquals("Dañado", ejemplar.getEstado(), "El estado debe coincidir con el asignado.");
+    }
+
+    // Verificar la disponibilidad del ejemplar
+    @Test
+    void testSetGetDisponible() {
+        ejemplar.setDisponible(false);
+        assertFalse(ejemplar.isDisponible(), "El ejemplar debe estar marcado como no disponible.");
+        
+        ejemplar.setDisponible(true);
+        assertTrue(ejemplar.isDisponible(), "El ejemplar debe estar marcado como disponible.");
+    }
+
+    // Verificar la asignación y obtención del código de barras
+    @Test
+    void testSetGetCodigoBarras() {
+        ejemplar.setCodigoBarras("codigo123");
+        assertEquals("codigo123", ejemplar.getCodigoBarras(), "El código de barras debe coincidir con el asignado.");
+    }
+
+    // Verificar que el código de barras se puede modificar correctamente
+    @Test
+    void testSetCodigoBarras() {
+        ejemplar.setCodigoBarras("codigo456");
+        assertEquals("codigo456", ejemplar.getCodigoBarras(), "El código de barras debe haber sido actualizado correctamente.");
+    }
+
+    // Verificar que un ejemplar esté disponible y su estado se pueda modificar
+    @Test
+    void testDisponibilidadYEstado() {
+        Ejemplar ejemplar = new Ejemplar("Nuevo", true);
+        
+        // Verificar disponibilidad
+        assertTrue(ejemplar.isDisponible(), "El ejemplar debe estar disponible al crearse.");
+        
+        // Cambiar disponibilidad
+        ejemplar.setDisponible(false);
+        assertFalse(ejemplar.isDisponible(), "El ejemplar debe estar no disponible después de cambiar la disponibilidad.");
+        
+        // Cambiar estado
+        ejemplar.setEstado("Dañado");
+        assertEquals("Dañado", ejemplar.getEstado(), "El estado debe haber sido actualizado.");
+    }
 }

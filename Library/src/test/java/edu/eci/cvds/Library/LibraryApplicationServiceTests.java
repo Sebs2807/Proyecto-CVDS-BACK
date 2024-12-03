@@ -1,5 +1,6 @@
 package edu.eci.cvds.Library;
 
+import edu.eci.cvds.library.model.Carga;
 import edu.eci.cvds.library.model.Categoria;
 import edu.eci.cvds.library.model.Ejemplar;
 import edu.eci.cvds.library.model.Libro;
@@ -9,13 +10,17 @@ import edu.eci.cvds.library.repository.EjemplarRepository;
 import edu.eci.cvds.library.repository.LibroRepository;
 import edu.eci.cvds.library.repository.SubcategoriaRepository;
 import edu.eci.cvds.library.service.*;
+import io.jsonwebtoken.io.IOException;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import edu.eci.cvds.library.*;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -65,6 +70,10 @@ class LibraryApplicationServiceTests {
 
     private Categoria categoria1;
     private Categoria categoria2;
+
+
+    @InjectMocks
+    private CargaService cargaService;
 
     @BeforeEach
     void setUp() {
@@ -267,5 +276,4 @@ class LibraryApplicationServiceTests {
         assertEquals("Ficción", categorias.get(0).getNombre());
         assertEquals("Ciencia Ficción", categorias.get(1).getNombre());
     }
-
 }

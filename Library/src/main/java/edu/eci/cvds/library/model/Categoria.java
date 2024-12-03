@@ -20,7 +20,7 @@ public class Categoria {
     private String idCategoria; // Identificador único de la categoría en la base de datos.
     private String nombre; // Nombre de la categoría.
 
-    @DBRef(lazy = false)
+    @DBRef(lazy = true)
     private List<Subcategoria> subcategorias; // Lista de subcategorías asociadas a esta categoría.
 
     /**
