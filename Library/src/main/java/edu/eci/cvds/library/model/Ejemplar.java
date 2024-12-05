@@ -3,10 +3,15 @@ package edu.eci.cvds.library.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
- * Representa un ejemplar físico de un libro dentro del sistema de gestión de biblioteca.
- * Cada ejemplar tiene un estado físico, un identificador único, y detalles adicionales como disponibilidad y códigos de identificación.
+ * Representa un ejemplar físico de un libro dentro del sistema de gestión de
+ * biblioteca.
+ * Cada ejemplar tiene un estado físico, un identificador único, y detalles
+ * adicionales como disponibilidad y códigos de identificación.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "ejemplares")
 public class Ejemplar {
     @Id
@@ -18,12 +23,16 @@ public class Ejemplar {
     /**
      * Constructor que inicializa un ejemplar con su estado físico y disponibilidad.
      * 
-     * @param estado Estado físico del ejemplar.
-     * @param disponible Disponibilidad del ejemplar (true si está disponible, false en caso contrario).
+     * @param estado     Estado físico del ejemplar.
+     * @param disponible Disponibilidad del ejemplar (true si está disponible, false
+     *                   en caso contrario).
      */
     public Ejemplar(String estado, boolean disponible) {
         this.estado = estado;
         this.disponible = disponible;
+    }
+
+    public Ejemplar() {
     }
 
     // Getters y Setters
@@ -76,7 +85,8 @@ public class Ejemplar {
     /**
      * Asigna la disponibilidad del ejemplar.
      * 
-     * @param disponible true si el ejemplar está disponible, false en caso contrario.
+     * @param disponible true si el ejemplar está disponible, false en caso
+     *                   contrario.
      */
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
@@ -91,7 +101,7 @@ public class Ejemplar {
         return codigoBarras;
     }
 
-    public void setCodigoBarras(String direccionURL){
+    public void setCodigoBarras(String direccionURL) {
         this.codigoBarras = direccionURL;
     }
 

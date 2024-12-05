@@ -7,12 +7,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Clase que representa una categoría en el sistema de gestión de biblioteca.
  * Cada categoría tiene un identificador único, un nombre, y una lista de
  * subcategorías asociadas.
  * Se utiliza la integración con MongoDB para el almacenamiento de los datos.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "categorias")
 public class Categoria {
 
@@ -31,6 +34,10 @@ public class Categoria {
      */
     public Categoria(String nombre) {
         this.nombre = nombre;
+        this.subcategorias = new ArrayList<>();
+    }
+
+    public Categoria() {
         this.subcategorias = new ArrayList<>();
     }
 
