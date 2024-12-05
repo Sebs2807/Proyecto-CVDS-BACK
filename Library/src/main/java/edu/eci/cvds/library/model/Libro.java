@@ -5,8 +5,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "libros")
 public class Libro {
 
@@ -25,10 +26,11 @@ public class Libro {
     @DBRef(lazy = true)
     private List<Subcategoria> subcategorias;
     @DBRef(lazy = true)
-    private List<Ejemplar>ejemplares;
+    private List<Ejemplar> ejemplares;
 
     // Constructor vacío necesario para la deserialización
-    public Libro(String nombreLibro, String autor, String editor, String edicion, String isbn, String sinopsis, String anioPublicacion) {
+    public Libro(String nombreLibro, String autor, String editor, String edicion, String isbn, String sinopsis,
+            String anioPublicacion) {
         this.nombreLibro = nombreLibro;
         this.autor = autor;
         this.editor = editor;
@@ -39,7 +41,13 @@ public class Libro {
         categorias = new ArrayList<>();
         subcategorias = new ArrayList<>();
         ejemplares = new ArrayList<>();
-    }   
+    }
+
+    public Libro() {
+        this.categorias = new ArrayList<>();
+        this.subcategorias = new ArrayList<>();
+        this.ejemplares = new ArrayList<>();
+    }
 
     /**
      * Obtiene las categorías del libro.
@@ -206,31 +214,33 @@ public class Libro {
     }
 
     /**
-     * Busca dentro de la lista de categorias si existe aguna con ese nombre de categoria.
+     * Busca dentro de la lista de categorias si existe aguna con ese nombre de
+     * categoria.
      * 
      * @param nombreCategoria nombre de la categoria a buscar.
      */
     public Categoria findCategoria(String nombreCategoria) {
         for (Categoria c : categorias) {
             if (c.getNombre().equals(nombreCategoria)) {
-                return c;  
+                return c;
             }
         }
-        return null;  
+        return null;
     }
 
     /**
-     * Busca dentro de la lista de categorias si existe aguna con ese nombre de categoria.
+     * Busca dentro de la lista de categorias si existe aguna con ese nombre de
+     * categoria.
      * 
      * @param nombreCategoria booleano que indica si existe o no.
      */
     public boolean haveCategoria(String nombreCategoria) {
         for (Categoria c : categorias) {
             if (c.getNombre().equals(nombreCategoria)) {
-                return true;  
+                return true;
             }
         }
-        return false;  
+        return false;
     }
 
     /**
@@ -238,7 +248,7 @@ public class Libro {
      * 
      * @param categoria categoria que va ser adicionada.
      */
-    public void addCategoria(Categoria categoria){
+    public void addCategoria(Categoria categoria) {
         this.categorias.add(categoria);
     }
 
@@ -247,22 +257,23 @@ public class Libro {
      * 
      * @param categoria ejemplar que va ser adicionado.
      */
-    public void addEjemplar(Ejemplar ejemplar){
+    public void addEjemplar(Ejemplar ejemplar) {
         this.ejemplares.add(ejemplar);
     }
 
     /**
-     * Busca dentro de la lista de subcategorias si existe aguna con ese nombre de la subcategoria.
+     * Busca dentro de la lista de subcategorias si existe aguna con ese nombre de
+     * la subcategoria.
      * 
      * @param nombreSubcategoria booleano que indica si existe o no.
      */
     public boolean haveSubcategoria(String nombreSubcategoria) {
         for (Subcategoria c : subcategorias) {
             if (c.getNombre().equals(nombreSubcategoria)) {
-                return true;  
+                return true;
             }
         }
-        return false;  
+        return false;
     }
 
     /**
@@ -270,10 +281,10 @@ public class Libro {
      * 
      * @param subcategoria suncategoria que va ser adicionada.
      */
-    public void addSubcategoria(Subcategoria subcategoria){
+    public void addSubcategoria(Subcategoria subcategoria) {
         this.subcategorias.add(subcategoria);
     }
-    
+
     public String getAnioPublicacion() {
         return anioPublicacion;
     }

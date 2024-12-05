@@ -3,13 +3,17 @@ package edu.eci.cvds.library.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Representa una subcategoría dentro del sistema de gestión de biblioteca.
- * Esta clase es mapeada a un documento en la colección "subcategorias" de MongoDB.
+ * Esta clase es mapeada a un documento en la colección "subcategorias" de
+ * MongoDB.
  * Cada subcategoría está asociada con un nombre y un identificador único.
  * 
  * @author [Tu Nombre]
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "subcategorias")
 public class Subcategoria {
 
@@ -20,7 +24,8 @@ public class Subcategoria {
     private String idSubcategoria;
 
     /**
-     * El nombre de la subcategoría, que es una descripción del tipo de libros que contiene.
+     * El nombre de la subcategoría, que es una descripción del tipo de libros que
+     * contiene.
      */
     private String nombre;
 
@@ -32,6 +37,9 @@ public class Subcategoria {
      */
     public Subcategoria(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Subcategoria() {
     }
 
     // Getters and Setters
