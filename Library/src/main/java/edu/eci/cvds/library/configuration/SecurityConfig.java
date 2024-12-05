@@ -14,12 +14,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-                .anyRequest().authenticated() // Requiere autenticación para las demás rutas
-            )
-            .addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class);
+                .csrf().disable()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/**", "/libros/**")
+                        .permitAll()
+                        .anyRequest().authenticated() // Requiere autenticación para las demás rutas
+                )
+                .addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
