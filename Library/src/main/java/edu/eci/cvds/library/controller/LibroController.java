@@ -1,6 +1,8 @@
 package edu.eci.cvds.library.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,8 +43,10 @@ public class LibroController {
      * @return ResponseEntity con la lista de todos los libros.
      */
     @GetMapping
-    public ResponseEntity<List<Libro>> obtenerTodosLosLibros() {
-        return ResponseEntity.ok(libroService.obtenerTodosLosLibros());
+    public ResponseEntity<Page<Libro>> obtenerTodosLosLibros(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+        return ResponseEntity.ok(libroService.obtenerTodosLosLibros(PageRequest.of(page, size)));
     }
 
     /**
