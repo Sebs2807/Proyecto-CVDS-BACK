@@ -13,7 +13,8 @@ import edu.eci.cvds.library.model.Libro;
 /**
  * Repositorio de la entidad Ejemplar que se conecta a la base de datos MongoDB.
  * Permite realizar operaciones CRUD sobre la colección de ejemplares.
- * Extiende la interfaz {@link MongoRepository} para proporcionar métodos básicos de acceso a datos,
+ * Extiende la interfaz {@link MongoRepository} para proporcionar métodos
+ * básicos de acceso a datos,
  * como guardar, buscar, actualizar y eliminar ejemplares en la base de datos.
  * 
  */
@@ -25,5 +26,5 @@ public interface EjemplarRepository extends MongoRepository<Ejemplar, String> {
     List<Ejemplar> findByDisponibleTrue();
 
     @Query(value = "{'id': { $regex: ?0}}")
-        Page<Libro> findByIdEjemplar(String regex, Pageable pageable);
+    Page<Libro> findByIdEjemplar(String regex, Pageable pageable);
 }

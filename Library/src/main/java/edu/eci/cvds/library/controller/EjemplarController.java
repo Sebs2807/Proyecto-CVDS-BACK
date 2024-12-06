@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/ejemplares")
 @PreAuthorize("hasRole('ADMIN')")
@@ -55,7 +54,6 @@ public class EjemplarController {
     public ResponseEntity<Ejemplar> nuevoEjemplar(@RequestBody Ejemplar ejemplar) {
         return ResponseEntity.ok(ejemplarService.crearOActualizarEjemplar(ejemplar));
     }
-    
 
     /**
      * @param id Identificador único del ejemplar a eliminar.
