@@ -16,7 +16,7 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/libros/*", "/**").permitAll()
                 .anyRequest().authenticated() // Requiere autenticación para las demás rutas
             )
             .addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class);

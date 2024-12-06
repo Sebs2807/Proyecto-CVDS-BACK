@@ -110,7 +110,7 @@ public class LibroService {
         Query query = new Query(criteria).with(pageable); 
         
         // Excluir los campos isbn y sinopsis
-        query.fields().exclude("categorias").exclude("subcategorias").exclude("ejemplares");
+        query.fields().exclude("subcategorias").exclude("ejemplares");
         List<Libro> libros = mongoTemplate.find(query, Libro.class);
         long total = mongoTemplate.count(query, Libro.class); 
 
