@@ -86,10 +86,9 @@ public class CargaService {
         boolean disponible = determinarDisponibilidad(row, carga);
 
         Libro libro = obtenerOActualizarLibro(nombreLibro, autor, editorial, edicion, isbn, sinopsis, anioPublicacion);
-        Categoria categoria = manejarCategoria(getCellValue(row, carga.getCategoria()));
-        Subcategoria subcategoria = manejarSubcategoria(getCellValue(row, carga.getSubcategoria()), categoria);
-
-        asociarCategoriaYSubcategoria(libro, categoria, subcategoria);
+        Subcategoria subcategoria = manejarSubcategoria(getCellValue(row, carga.getSubcategoria()));
+        manejarCategoria(getCellValue(row, carga.getCategoria()), subcategoria);
+        asociarSubcategoria(libro, subcategoria);
         agregarEjemplar(libro, estadoFisico, disponible);
     }
 
@@ -119,7 +118,7 @@ public class CargaService {
      */
     public Libro obtenerOActualizarLibro(String nombre, String autor, String editorial, String edicion,
             String isbn, String sinopsis, String anioPublicacion) {
-        List<Libro> libros = libroRepository.buscarPorCualquierCampo(nombre, autor, editorial, edicion);
+        List<Libro> libros = libroRepository.buscarPorCualquierCampo(nombre, autor, edicion);
 
         if (libros != null && !libros.isEmpty()) {
             return libros.get(0);
@@ -136,17 +135,17 @@ public class CargaService {
      * @param categoriaNombre Nombre de la categoría.
      * @return Objeto `Categoria` existente o recién creado.
      */
-    public Categoria manejarCategoria(String categoriaNombre) {
-        if (categoriaNombre == null || categoriaNombre.trim().isEmpty()) {
+    public Subcategoria manejarSubcategoria(String subcategoriaNombre) {
+        if (subcategoriaNombre == null || subcategoriaNombre.trim().isEmpty()) {
             return null;
         }
 
-        Categoria categoria = categoriaService.obtenerCategoriaPorNombre(categoriaNombre);
-        if (categoria == null) {
-            categoria = new Categoria(categoriaNombre);
-            categoriaService.crearOActualizarCategoria(categoria);
+        Subcategoria subcategoria = subcategoriaService.obtenerSubcategoriaPorNombre(subcategoriaNombre);
+        if (subcategoria == null) {
+            subcategoria = new Subcategoria(subcategoriaNombre);
+            subcategoriaService.crearOActualizarSubcategoria(subcategoria);
         }
-        return categoria;
+        return subcategoria;
     }
 
     /**
@@ -157,26 +156,19 @@ public class CargaService {
      * @param categoria          Categoría asociada.
      * @return Objeto `Subcategoria` existente o recién creado.
      */
-    public Subcategoria manejarSubcategoria(String subcategoriaNombre, Categoria categoria) {
-        if (subcategoriaNombre == null || subcategoriaNombre.trim().isEmpty()) {
-            return null;
-        }
-
-        Subcategoria subcategoria = subcategoriaService.obtenerSubcategoriaPorNombre(subcategoriaNombre);
-        if (subcategoria == null) {
-            subcategoria = new Subcategoria(subcategoriaNombre);
-            subcategoriaService.crearOActualizarSubcategoria(subcategoria);
-        }
-
-        if (categoria != null) {
-            if (categoria.findSubcategoria(subcategoria.getNombre())) {
-                return subcategoria;
-            }
-            categoria.addSubcategoria(subcategoria);
+    public void  manejarCategoria(String categoriaNombre, Subcategoria subcategoria) {
+        Categoria categoria = categoriaService.obtenerCategoriaPorNombre(categoriaNombre);
+        if (categoria == null) {
+            categoria = new Categoria(categoriaNombre);
             categoriaService.crearOActualizarCategoria(categoria);
         }
 
-        return subcategoria;
+        if (subcategoria != null) {
+            if (!subcategoria.findCategoria(categoria.getNombre())) {
+                subcategoria.addCategoria(categoria);
+                subcategoriaService.crearOActualizarSubcategoria(subcategoria);
+            }
+        }
     }
 
     /**
@@ -186,13 +178,10 @@ public class CargaService {
      * @param categoria    Categoría a asociar.
      * @param subcategoria Subcategoría a asociar.
      */
-    public void asociarCategoriaYSubcategoria(Libro libro, Categoria categoria, Subcategoria subcategoria) {
-        if (categoria != null && !libro.haveCategoria(categoria.getNombre())) {
-            libro.addCategoria(categoria);
-        }
-
-        if (subcategoria != null && !libro.haveSubcategoria(subcategoria.getNombre())) {
+    public void asociarSubcategoria(Libro libro, Subcategoria subcategoria) {
+        if (!libro.haveSubcategoria(subcategoria.getNombre())) {
             libro.addSubcategoria(subcategoria);
+            libroService.actualizarLibro(libro);
         }
     }
 
@@ -206,9 +195,8 @@ public class CargaService {
      */
     public void agregarEjemplar(Libro libro, String estadoFisico, boolean disponible) throws IOException {
         Ejemplar ejemplar = new Ejemplar(estadoFisico, disponible);
+        ejemplar.setLibro(libro);
         ejemplarService.crearOActualizarEjemplar(ejemplar);
-        libro.addEjemplar(ejemplar);
-        libroService.actualizarLibro(libro);
     }
 
     /**

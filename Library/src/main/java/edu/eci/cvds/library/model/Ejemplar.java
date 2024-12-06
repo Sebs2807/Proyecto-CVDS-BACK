@@ -1,6 +1,8 @@
 package edu.eci.cvds.library.model;
 
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,6 +21,8 @@ public class Ejemplar {
     private String estado; // Estado físico del ejemplar (e.g., "Nuevo", "Usado", "Dañado").
     private boolean disponible; // Indica si el ejemplar está disponible para préstamo.
     private String codigoBarras; // Código de barras asociado al ejemplar.
+    @DBRef
+    private Libro libro;
 
     /**
      * Constructor que inicializa un ejemplar con su estado físico y disponibilidad.
@@ -103,6 +107,10 @@ public class Ejemplar {
 
     public void setCodigoBarras(String direccionURL) {
         this.codigoBarras = direccionURL;
+    }
+
+    public void setLibro(Libro libro) {
+        this.libro = libro;
     }
 
 }
