@@ -67,4 +67,16 @@ public class SubcategoriaController {
 		subcategoriaService.eliminarSubcategoria(idSubcategoria);
 		return ResponseEntity.noContent().build();
 	}
+
+	/**
+	 * Obtiene las subcategorías asociadas a una categoría específica.
+	 *
+	 * @param categoriaId ID de la categoría.
+	 * @return Lista de subcategorías asociadas a la categoría.
+	 */
+	@GetMapping("/byCategoria/{categoriaId}")
+	public ResponseEntity<List<Subcategoria>> obtenerSubcategoriasPorCategoria(@PathVariable String categoriaId) {
+		List<Subcategoria> subcategorias = subcategoriaService.obtenerSubcategoriasPorCategoria(categoriaId);
+		return ResponseEntity.ok(subcategorias);
+	}
 }

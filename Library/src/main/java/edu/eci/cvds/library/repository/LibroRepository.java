@@ -36,8 +36,8 @@ public interface LibroRepository extends MongoRepository<Libro, String> {
      * @param edicion     edición del libro a buscar.
      * @return una lista de libros que coinciden con los criterios de búsqueda.
      */
-    @Query("{ $and: [ { 'nombreLibro': ?0 }, { 'autor': ?1 }, { 'editor': ?2 }, { 'edicion': ?3 } ] }")
-    List<Libro> buscarPorCualquierCampo(String nombreLibro, String autor, String editor, String edicion);
+    @Query("{ $and: [ { 'nombreLibro': ?0 }, { 'autor': ?1 }, { 'edicion': ?2 } ] }")
+    List<Libro> buscarPorCualquierCampo(String nombreLibro, String autor, String edicion);
 
     List<Libro> findByNombreLibroContainingIgnoreCase(String nombre);
 
