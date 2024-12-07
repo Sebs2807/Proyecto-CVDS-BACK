@@ -30,7 +30,7 @@ public class Categoria {
     }
 
     public Categoria() {
-        this.subcategorias = new ArrayList<>();
+
     }
 
     // Getters y Setters

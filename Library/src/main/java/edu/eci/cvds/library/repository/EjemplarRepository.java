@@ -27,4 +27,6 @@ public interface EjemplarRepository extends MongoRepository<Ejemplar, String> {
 
     @Query(value = "{'id': { $regex: ?0}}")
     Page<Libro> findByIdEjemplar(String regex, Pageable pageable);
+
+    List<Ejemplar> findByLibro(String libroId);
 }

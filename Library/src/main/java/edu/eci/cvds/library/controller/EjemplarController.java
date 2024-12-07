@@ -31,6 +31,11 @@ public class EjemplarController {
         return ResponseEntity.ok(ejemplarService.obtenerTodosLosEjemplares());
     }
 
+    @GetMapping("/libro/{libroId}")
+    public ResponseEntity<List<Ejemplar>> obtenerEjemplaresPorLibroId(@PathVariable String libroId) {
+        return ResponseEntity.ok(ejemplarService.obtenerEjemplaresPorLibroId(libroId));
+    }
+
     /**
      * @param id Identificador único del ejemplar a buscar.
      * @return Un objeto `ResponseEntity` con el ejemplar encontrado o un estado
@@ -50,9 +55,10 @@ public class EjemplarController {
         return ResponseEntity.ok(ejemplarService.obtenerEjemplaresDisponibles());
     }
 
-    @PostMapping("/singular")
+    @PostMapping
     public ResponseEntity<Ejemplar> nuevoEjemplar(@RequestBody Ejemplar ejemplar) {
-        return ResponseEntity.ok(ejemplarService.crearOActualizarEjemplar(ejemplar));
+        Ejemplar nuevoEjemplar = ejemplarService.crearOActualizarEjemplar(ejemplar);
+        return ResponseEntity.ok(nuevoEjemplar);
     }
 
     /**

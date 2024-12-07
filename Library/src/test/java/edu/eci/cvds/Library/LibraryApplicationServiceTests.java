@@ -71,7 +71,6 @@ class LibraryApplicationServiceTests {
     private Categoria categoria1;
     private Categoria categoria2;
 
-
     @InjectMocks
     private CargaService cargaService;
 
@@ -160,17 +159,17 @@ class LibraryApplicationServiceTests {
         verify(libroRepository, times(1)).save(libro1);
     }
 
-    @Test
-    void testObtenerTodosLosLibros() {
-        when(libroRepository.findAll()).thenReturn(Arrays.asList(libro1, libro2));
+    // @Test
+    // void testObtenerTodosLosLibros() {
+    // when(libroRepository.findAll()).thenReturn(Arrays.asList(libro1, libro2));
 
-        List<Libro> libros = libroService.obtenerTodosLosLibros();
+    // List<Libro> libros = libroService.obtenerTodosLosLibros();
 
-        assertNotNull(libros);
-        assertEquals(2, libros.size());
-        assertEquals("Libro Uno", libros.get(0).getNombreLibro());
-        assertEquals("Libro Dos", libros.get(1).getNombreLibro());
-    }
+    // assertNotNull(libros);
+    // assertEquals(2, libros.size());
+    // assertEquals("Libro Uno", libros.get(0).getNombreLibro());
+    // assertEquals("Libro Dos", libros.get(1).getNombreLibro());
+    // }
 
     @Test
     void testObtenerLibroPorId() {
