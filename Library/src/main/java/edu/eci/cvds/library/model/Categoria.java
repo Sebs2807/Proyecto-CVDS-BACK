@@ -40,7 +40,7 @@ public class Categoria {
      * 
      * @return El identificador de la categoría.
      */
-    public String getIdCategoria() {
+    public String getId() {
         return idCategoria;
     }
 
@@ -53,7 +53,7 @@ public class Categoria {
         return nombre;
     }
 
-    public void setIdCategoria(String idCategoria) {
+    public void setId(String idCategoria) {
         this.idCategoria = idCategoria;
     }
 }

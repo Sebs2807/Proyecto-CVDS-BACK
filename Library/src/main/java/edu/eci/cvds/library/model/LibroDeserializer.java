@@ -16,7 +16,7 @@ import java.io.IOException;
 public class LibroDeserializer extends JsonDeserializer<Libro> {
 
   @Autowired
-  private LibroRepository libroRepository;
+public LibroRepository libroRepository;
 
   @Override
   public Libro deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

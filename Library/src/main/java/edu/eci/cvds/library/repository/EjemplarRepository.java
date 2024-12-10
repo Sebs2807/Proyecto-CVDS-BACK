@@ -26,7 +26,7 @@ public interface EjemplarRepository extends MongoRepository<Ejemplar, String> {
     List<Ejemplar> findByDisponibleTrue();
 
     @Query(value = "{'id': { $regex: ?0}}")
-    Page<Libro> findByIdEjemplar(String regex, Pageable pageable);
+    Page<Ejemplar> findByIdEjemplar(String regex, Pageable pageable);
 
     List<Ejemplar> findByLibro(String libroId);
 }

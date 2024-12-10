@@ -138,7 +138,7 @@ public class EjemplarService {
         return true;
     }
 
-    public Page<Libro> findById(String idEjemplar, Pageable pageable) {
+    public Page<Ejemplar> findById(String idEjemplar, Pageable pageable) {
         return (ejemplarRepository.findByIdEjemplar(idEjemplar, pageable));
     }
 

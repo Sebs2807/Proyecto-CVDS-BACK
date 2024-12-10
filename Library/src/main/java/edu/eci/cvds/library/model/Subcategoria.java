@@ -16,11 +16,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Subcategoria {
 
     @Id
-    private String idSubcategoria;
+    private String id;
     private String nombre;
 
     @DBRef(lazy = false)
     private List<Categoria> categorias;
+
+    public Subcategoria(String nombre){
+        this.nombre = nombre;
+    }
 
     // No-argument constructor
     public Subcategoria() {
@@ -35,12 +39,12 @@ public class Subcategoria {
     }
 
     // Getters and Setters
-    public String getIdSubcategoria() {
-        return idSubcategoria;
+    public String getId() {
+        return id;
     }
 
-    public void setIdSubcategoria(String idSubcategoria) {
-        this.idSubcategoria = idSubcategoria;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
