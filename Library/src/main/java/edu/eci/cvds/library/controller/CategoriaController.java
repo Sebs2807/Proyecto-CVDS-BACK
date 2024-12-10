@@ -12,7 +12,7 @@ import edu.eci.cvds.library.service.CategoriaService;
 
 @RestController
 @RequestMapping("/categorias")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('admin') or hasRole('student')")
 public class CategoriaController {
 
 	@Autowired
@@ -78,7 +78,7 @@ public class CategoriaController {
 	@PutMapping("/{idCategoria}")
 	public ResponseEntity<Categoria> actualizarCategoria(@PathVariable String idCategoria,
 			@RequestBody Categoria categoria) {
-		categoria.setIdCategoria(idCategoria); // Asegura que el ID sea correcto
+		categoria.setId(idCategoria); // Asegura que el ID sea correcto
 		Categoria categoriaActualizada = categoriaService.crearOActualizarCategoria(categoria);
 		return ResponseEntity.ok(categoriaActualizada);
 	}

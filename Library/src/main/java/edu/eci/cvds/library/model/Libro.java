@@ -35,7 +35,6 @@ public class Libro {
         this.sinopsis = sinopsis;
         this.anioPublicacion = anioPublicacion;
         subcategorias = new ArrayList<>();
-        // ejemplares = new ArrayList<>();
     }
 
     /**

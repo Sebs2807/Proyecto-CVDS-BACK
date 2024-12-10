@@ -12,7 +12,7 @@ import edu.eci.cvds.library.service.SubcategoriaService;
 
 @RestController
 @RequestMapping("/subcategorias")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('admin') or hasRole('student')")
 public class SubcategoriaController {
 
 	@Autowired

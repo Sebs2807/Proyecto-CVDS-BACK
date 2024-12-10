@@ -37,9 +37,6 @@ public class Ejemplar {
         this.disponible = disponible;
     }
 
-    public Ejemplar() {
-    }
-
     // Getters y Setters
 
     /**
