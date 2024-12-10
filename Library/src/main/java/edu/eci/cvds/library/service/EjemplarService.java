@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import edu.eci.cvds.library.model.Ejemplar;
 import edu.eci.cvds.library.model.Libro;
 import edu.eci.cvds.library.repository.EjemplarRepository;
+import edu.eci.cvds.library.repository.LibroRepository;
 
 /**
  * Servicio para manejar la creación, actualización y generación de códigos QR y
@@ -24,11 +25,15 @@ public class EjemplarService {
 
     private final EjemplarRepository ejemplarRepository;
     private final AzureBlobStorageService azureBlobStorageService;
+    private final LibroRepository libroRepository;
 
     @Autowired
-    public EjemplarService(EjemplarRepository ejemplarRepository, AzureBlobStorageService azureBlobStorageService) {
+    public EjemplarService(EjemplarRepository ejemplarRepository, AzureBlobStorageService azureBlobStorageService,
+            LibroRepository libroRepository) {
         this.ejemplarRepository = ejemplarRepository;
         this.azureBlobStorageService = azureBlobStorageService;
+        this.libroRepository = libroRepository;
+
     }
 
     /**
@@ -40,24 +45,11 @@ public class EjemplarService {
      *         null si ocurre un error.
      */
     public Ejemplar crearOActualizarEjemplar(Ejemplar ejemplar) {
-        try {
-            // Guardar el ejemplar en la base de datos
-            Ejemplar ejemplarCarga = ejemplarRepository.save(ejemplar);
-
-            // Generar el QR en formato InputStream
-            String cbFileName = "cb-" + ejemplarCarga.getId() + ".png";
-
-            // Subir el QR a Azure Blob Storage
-            azureBlobStorageService.guardarArchivoEnBlob(ejemplarCarga.getId(), cbFileName);
-
-            // Actualizar el ejemplar con el nombre del archivo QR subido
-            ejemplarCarga.setCodigoBarras(cbFileName);
-            return ejemplarRepository.save(ejemplarCarga);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+        if (ejemplar.getLibro() != null) {
+            Optional<Libro> libro = libroRepository.findById(ejemplar.getLibro().getId());
+            libro.ifPresent(ejemplar::setLibro);
         }
+        return ejemplarRepository.save(ejemplar);
     }
 
     /**
@@ -95,6 +87,10 @@ public class EjemplarService {
      * @return Ejemplar actualizado.
      */
     public Ejemplar actualizarEjemplar(Ejemplar ejemplar) {
+        if (ejemplar.getLibro() != null) {
+            Optional<Libro> libro = libroRepository.findById(ejemplar.getLibro().getId());
+            libro.ifPresent(ejemplar::setLibro);
+        }
         return ejemplarRepository.save(ejemplar);
     }
 
@@ -142,7 +138,11 @@ public class EjemplarService {
         return true;
     }
 
-    public Page<Libro> findById(String idEjemplar, Pageable pageable) {
-        return(ejemplarRepository.findByIdEjemplar(idEjemplar, pageable));
+    public Page<Ejemplar> findById(String idEjemplar, Pageable pageable) {
+        return (ejemplarRepository.findByIdEjemplar(idEjemplar, pageable));
+    }
+
+    public List<Ejemplar> obtenerEjemplaresPorLibroId(String libroId) {
+        return ejemplarRepository.findByLibro(libroId);
     }
 }

@@ -12,7 +12,7 @@ import edu.eci.cvds.library.service.SubcategoriaService;
 
 @RestController
 @RequestMapping("/subcategorias")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('admin') or hasRole('student')")
 public class SubcategoriaController {
 
 	@Autowired
@@ -66,5 +66,17 @@ public class SubcategoriaController {
 	public ResponseEntity<Void> eliminarSubcategoria(@PathVariable String idSubcategoria) {
 		subcategoriaService.eliminarSubcategoria(idSubcategoria);
 		return ResponseEntity.noContent().build();
+	}
+
+	/**
+	 * Obtiene las subcategorías asociadas a una categoría específica.
+	 *
+	 * @param categoriaId ID de la categoría.
+	 * @return Lista de subcategorías asociadas a la categoría.
+	 */
+	@GetMapping("/byCategoria/{categoriaId}")
+	public ResponseEntity<List<Subcategoria>> obtenerSubcategoriasPorCategoria(@PathVariable String categoriaId) {
+		List<Subcategoria> subcategorias = subcategoriaService.obtenerSubcategoriasPorCategoria(categoriaId);
+		return ResponseEntity.ok(subcategorias);
 	}
 }

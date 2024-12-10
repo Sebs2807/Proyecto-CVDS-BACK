@@ -17,14 +17,14 @@ import edu.eci.cvds.library.repository.LibroRepository;
 @Service
 public class LibroService {
 
-    @Autowired
     private MongoTemplate mongoTemplate;
 
     private LibroRepository libroRepository;
 
     @Autowired
-    public LibroService(LibroRepository libroRepository) {
+    public LibroService(LibroRepository libroRepository, MongoTemplate mongoTemplate) {
         this.libroRepository = libroRepository;
+        this.mongoTemplate = mongoTemplate;
     }
 
     /**
@@ -42,8 +42,8 @@ public class LibroService {
      * 
      * @return lista de todos los libros.
      */
-    public List<Libro> obtenerTodosLosLibros() {
-        return libroRepository.findAll();
+    public Page<Libro> obtenerTodosLosLibros(Pageable pageable) {
+        return libroRepository.findAll(pageable);
     }
 
     /**
@@ -106,13 +106,12 @@ public class LibroService {
     }
 
     public Page<Libro> findByFieldWithRegexExcluding(String fieldName, String regex, Pageable pageable) {
-        Criteria criteria = Criteria.where(fieldName).regex(regex, "i"); 
-        Query query = new Query(criteria).with(pageable); 
-        
-        // Excluir los campos isbn y sinopsis
-        query.fields().exclude("categorias").exclude("subcategorias").exclude("ejemplares");
+        Criteria criteria = Criteria.where(fieldName).regex(regex, "i");
+        Query query = new Query(criteria).with(pageable);
+
+        query.fields().exclude("subcategorias").exclude("ejemplares");
         List<Libro> libros = mongoTemplate.find(query, Libro.class);
-        long total = mongoTemplate.count(query, Libro.class); 
+        long total = mongoTemplate.count(query, Libro.class);
 
         return new PageImpl<>(libros, pageable, total);
     }

@@ -12,7 +12,7 @@ import edu.eci.cvds.library.service.CategoriaService;
 
 @RestController
 @RequestMapping("/categorias")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('admin') or hasRole('student')")
 public class CategoriaController {
 
 	@Autowired
@@ -46,13 +46,13 @@ public class CategoriaController {
 	 * @return ResponseEntity con la categoría encontrada o 404 si no existe.
 	 */
 	@GetMapping("/{idCategoria}")
-	public ResponseEntity<Categoria> obtenerSubcategoriaPorId(@PathVariable String idCategoria) {
+	public ResponseEntity<Categoria> obtenerCategoriaPorId(@PathVariable String idCategoria) {
 		Optional<Categoria> categoriaProvisional = categoriaService.obtenerCategoriaPorId(idCategoria);
 
 		if (categoriaProvisional.isPresent()) {
-		return ResponseEntity.ok(categoriaProvisional.get());
+			return ResponseEntity.ok(categoriaProvisional.get());
 		} else {
-		return ResponseEntity.notFound().build();
+			return ResponseEntity.notFound().build();
 		}
 	}
 
@@ -63,8 +63,23 @@ public class CategoriaController {
 	 * @return ResponseEntity sin contenido si se elimina exitosamente.
 	 */
 	@DeleteMapping("/{idCategoria}")
-	public ResponseEntity<Void> eliminarSubcategoria(@PathVariable String idCategoria) {
+	public ResponseEntity<Void> eliminarCategoria(@PathVariable String idCategoria) {
 		categoriaService.eliminarCategoria(idCategoria);
 		return ResponseEntity.noContent().build();
+	}
+
+	/**
+	 * Actualiza una categoría por su ID.
+	 * 
+	 * @param idCategoria ID de la categoría a actualizar.
+	 * @param categoria   Objeto categoría con los datos actualizados.
+	 * @return ResponseEntity con la categoría actualizada.
+	 */
+	@PutMapping("/{idCategoria}")
+	public ResponseEntity<Categoria> actualizarCategoria(@PathVariable String idCategoria,
+			@RequestBody Categoria categoria) {
+		categoria.setId(idCategoria); // Asegura que el ID sea correcto
+		Categoria categoriaActualizada = categoriaService.crearOActualizarCategoria(categoria);
+		return ResponseEntity.ok(categoriaActualizada);
 	}
 }

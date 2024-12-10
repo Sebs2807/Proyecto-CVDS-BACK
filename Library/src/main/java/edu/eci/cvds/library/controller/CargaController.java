@@ -19,7 +19,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/cargas")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('admin') or hasRole('student')")
 public class CargaController {
 
     private CargaService cargaService;

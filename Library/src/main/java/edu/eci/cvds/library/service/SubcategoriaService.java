@@ -6,22 +6,26 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import edu.eci.cvds.library.model.Categoria;
 import edu.eci.cvds.library.model.Subcategoria;
+import edu.eci.cvds.library.repository.CategoriaRepository;
 import edu.eci.cvds.library.repository.SubcategoriaRepository;
 
 @Service
 public class SubcategoriaService {
 
-	private SubcategoriaRepository subcategoriaRepository;
-	
+	private final SubcategoriaRepository subcategoriaRepository;
+	private final CategoriaRepository categoriaRepository;
+
 	@Autowired
-	public SubcategoriaService(SubcategoriaRepository subcategoriaRepository){
+	public SubcategoriaService(SubcategoriaRepository subcategoriaRepository, CategoriaRepository categoriaRepository) {
 		this.subcategoriaRepository = subcategoriaRepository;
+		this.categoriaRepository = categoriaRepository;
 	}
 
 	/**
 	 * Crea o actualiza una subcategoría en la base de datos.
-	 * 
+	 *
 	 * @param subcategoria Objeto subcategoría a crear o actualizar.
 	 * @return la subcategoría creada o actualizada.
 	 */
@@ -31,7 +35,7 @@ public class SubcategoriaService {
 
 	/**
 	 * Obtiene todas las subcategorías almacenadas en la base de datos.
-	 * 
+	 *
 	 * @return lista de todas las subcategorías.
 	 */
 	public List<Subcategoria> obtenerTodasLasSubcategorias() {
@@ -40,7 +44,7 @@ public class SubcategoriaService {
 
 	/**
 	 * Obtiene una subcategoría por su ID.
-	 * 
+	 *
 	 * @param idSubcategoria ID de la subcategoría a buscar.
 	 * @return un Optional con la subcategoría encontrada o vacío si no existe.
 	 */
@@ -48,16 +52,35 @@ public class SubcategoriaService {
 		return subcategoriaRepository.findById(idSubcategoria);
 	}
 
+	/**
+	 * Obtiene una subcategoría por su nombre.
+	 *
+	 * @param nombreSubcategoria Nombre de la subcategoría a buscar.
+	 * @return La subcategoría encontrada, o null si no existe.
+	 */
 	public Subcategoria obtenerSubcategoriaPorNombre(String nombreSubcategoria) {
-        return subcategoriaRepository.findSubcategoriaByNombre(nombreSubcategoria);
-    }
+		return subcategoriaRepository.findSubcategoriaByNombre(nombreSubcategoria);
+	}
 
 	/**
 	 * Elimina una subcategoría por su ID.
-	 * 
+	 *
 	 * @param idSubcategoria ID de la subcategoría a eliminar.
 	 */
 	public void eliminarSubcategoria(String idSubcategoria) {
 		subcategoriaRepository.deleteById(idSubcategoria);
+	}
+
+	/**
+	 * Obtiene las subcategorías asociadas a una categoría específica.
+	 *
+	 * @param categoriaId ID de la categoría.
+	 * @return Lista de subcategorías asociadas a la categoría.
+	 */
+	public List<Subcategoria> obtenerSubcategoriasPorCategoria(String categoriaId) {
+		Categoria categoria = categoriaRepository.findById(categoriaId)
+				.orElseThrow(() -> new RuntimeException("Categoria not found with ID: " + categoriaId));
+
+		return subcategoriaRepository.findByCategoriasContaining(categoria);
 	}
 }

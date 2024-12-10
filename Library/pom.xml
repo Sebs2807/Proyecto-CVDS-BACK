@@ -46,23 +46,6 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>0.11.5</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>0.11.5</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>0.12.6</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
@@ -137,6 +120,12 @@
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version> <!-- O la versión que necesites -->
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -164,16 +153,9 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/LibraryApplication.class</exclude>
-                                <exclude>**/CustomIntegerDeserializer.class</exclude>
-                                <exclude>**/LibroController.class</exclude>
-                                <exclude>**/EjemplarService.class</exclude>
-                                <exclude>**/CargaService.class</exclude>
-                                <exclude>**/AzureBlobStorageService.class</exclude>
-                                <exclude>**/JwtFilter.class</exclude>
-                                <exclude>**/JwtAuthenticationToken.class</exclude>
                                 <exclude>**/edu/eci/cvds/library/controller/**</exclude>
                                 <exclude>**/edu/eci/cvds/library/exceptions/**</exclude>
-                                <exclude>**/BusquedaService.class</exclude>
+                                <exclude>**/edu/eci/cvds/library/configuration/**</exclude>
                             </excludes>
                         </configuration>
                     </execution>

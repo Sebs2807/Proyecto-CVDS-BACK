@@ -11,10 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/ejemplares")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('admin') or hasRole('student')")
 public class EjemplarController {
 
     private final EjemplarService ejemplarService;
@@ -30,6 +29,11 @@ public class EjemplarController {
     @GetMapping
     public ResponseEntity<List<Ejemplar>> obtenerTodosLosEjemplares() {
         return ResponseEntity.ok(ejemplarService.obtenerTodosLosEjemplares());
+    }
+
+    @GetMapping("/libro/{libroId}")
+    public ResponseEntity<List<Ejemplar>> obtenerEjemplaresPorLibroId(@PathVariable String libroId) {
+        return ResponseEntity.ok(ejemplarService.obtenerEjemplaresPorLibroId(libroId));
     }
 
     /**
@@ -51,11 +55,11 @@ public class EjemplarController {
         return ResponseEntity.ok(ejemplarService.obtenerEjemplaresDisponibles());
     }
 
-    @PostMapping("/singular")
+    @PostMapping
     public ResponseEntity<Ejemplar> nuevoEjemplar(@RequestBody Ejemplar ejemplar) {
-        return ResponseEntity.ok(ejemplarService.crearOActualizarEjemplar(ejemplar));
+        Ejemplar nuevoEjemplar = ejemplarService.crearOActualizarEjemplar(ejemplar);
+        return ResponseEntity.ok(nuevoEjemplar);
     }
-    
 
     /**
      * @param id Identificador único del ejemplar a eliminar.
