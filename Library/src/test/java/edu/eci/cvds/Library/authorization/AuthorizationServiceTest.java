@@ -34,7 +34,7 @@ class AuthorizationServiceTest {
         String token = "valid_token";
         TokenResponse expectedResponse = new TokenResponse();
         TokenResponse.Data data = new TokenResponse.Data();
-        data.setExp(System.currentTimeMillis() + 1000); 
+        data.setExp(System.currentTimeMillis()); 
         expectedResponse.setData(data);
 
         when(restTemplate.exchange(
@@ -61,7 +61,7 @@ class AuthorizationServiceTest {
         String token = "invalid_token";
         TokenResponse expectedResponse = new TokenResponse();
         TokenResponse.Data data = new TokenResponse.Data();
-        data.setExp(System.currentTimeMillis() - 1000);
+        data.setExp(System.currentTimeMillis()/1000);
         expectedResponse.setData(data);
 
         when(restTemplate.exchange(

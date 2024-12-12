@@ -12,7 +12,7 @@ public class TokenResponse {
     }
 
     public boolean isValid() {
-        long currentTime = System.currentTimeMillis();
+        long currentTime = System.currentTimeMillis()/1000;
         return currentTime < data.getExp();
     }
     
