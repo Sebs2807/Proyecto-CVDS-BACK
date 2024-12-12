@@ -1,6 +1,7 @@
 package edu.eci.cvds.library.configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,9 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
+            .info(new Info().title("API Documentation")
+                            .version("1.0")
+                            .description("Documentación de la API"))
             .addSecurityItem(new SecurityRequirement().addList("BearerAuth"))
             .components(new io.swagger.v3.oas.models.Components()
                 .addSecuritySchemes("BearerAuth",
@@ -20,7 +24,8 @@ public class SwaggerConfig {
                         .type(SecurityScheme.Type.HTTP)
                         .scheme("bearer")
                         .bearerFormat("JWT")
-                        .description("Ingrese el token en el formato: Bearer {token}")
+                        .description("Token de autorización en formato Bearer {token}")
                 ));
     }
 }
+
