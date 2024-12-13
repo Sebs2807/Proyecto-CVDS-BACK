@@ -24,6 +24,7 @@ public class Subcategoria {
 
     public Subcategoria(String nombre){
         this.nombre = nombre;
+        this.categorias = new ArrayList<>();
     }
 
     // No-argument constructor

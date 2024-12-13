@@ -196,7 +196,7 @@ public class CargaService {
     public void agregarEjemplar(Libro libro, String estadoFisico, boolean disponible) throws IOException {
         Ejemplar ejemplar = new Ejemplar(estadoFisico, disponible);
         ejemplar.setLibro(libro);
-        ejemplarService.crearOActualizarEjemplar(ejemplar);
+        ejemplarService.crearEjemplar(ejemplar);
     }
 
     /**

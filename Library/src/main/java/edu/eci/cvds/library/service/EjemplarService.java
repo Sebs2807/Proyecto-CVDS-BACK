@@ -44,12 +44,25 @@ public class EjemplarService {
      * @return El ejemplar creado o actualizado con los códigos QR y de barras, o
      *         null si ocurre un error.
      */
-    public Ejemplar crearOActualizarEjemplar(Ejemplar ejemplar) {
+    public Ejemplar crearEjemplar(Ejemplar ejemplar) {
         if (ejemplar.getLibro() != null) {
             Optional<Libro> libro = libroRepository.findById(ejemplar.getLibro().getId());
             libro.ifPresent(ejemplar::setLibro);
         }
-        return ejemplarRepository.save(ejemplar);
+        try {
+            Ejemplar ejemplarCarga = ejemplarRepository.save(ejemplar);
+
+            String cbFileName = "cb-" + ejemplarCarga.getId() + ".png";
+
+            azureBlobStorageService.guardarArchivoEnBlob(ejemplarCarga.getId(), cbFileName);
+
+            ejemplarCarga.setCodigoBarras(cbFileName);
+            return ejemplarRepository.save(ejemplarCarga);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**

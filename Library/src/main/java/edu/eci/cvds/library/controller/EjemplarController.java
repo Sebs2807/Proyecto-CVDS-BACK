@@ -57,7 +57,7 @@ public class EjemplarController {
 
     @PostMapping
     public ResponseEntity<Ejemplar> nuevoEjemplar(@RequestBody Ejemplar ejemplar) {
-        Ejemplar nuevoEjemplar = ejemplarService.crearOActualizarEjemplar(ejemplar);
+        Ejemplar nuevoEjemplar = ejemplarService.crearEjemplar(ejemplar);
         return ResponseEntity.ok(nuevoEjemplar);
     }
 
