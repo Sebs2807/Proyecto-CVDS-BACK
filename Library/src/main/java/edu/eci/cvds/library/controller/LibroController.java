@@ -132,9 +132,4 @@ public class LibroController {
         Optional<Libro> libro = libroService.obtenerLibroPorIsbn(isbn);
         return libro.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
-    @GetMapping("/test")
-    public String testEndpoint() {
-        return "El endpoint está funcionando.";
-    }
 }

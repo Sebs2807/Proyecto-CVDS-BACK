@@ -87,8 +87,8 @@ public class CargaService {
 
         Libro libro = obtenerOActualizarLibro(nombreLibro, autor, editorial, edicion, isbn, sinopsis, anioPublicacion);
         Subcategoria subcategoria = manejarSubcategoria(getCellValue(row, carga.getSubcategoria()));
-        manejarCategoria(getCellValue(row, carga.getCategoria()), subcategoria);
-        asociarSubcategoria(libro, subcategoria);
+        Categoria categoria = manejarCategoria(getCellValue(row, carga.getCategoria()), subcategoria);
+        asociarSubcategoriaYCategoria(libro, subcategoria, categoria);
         agregarEjemplar(libro, estadoFisico, disponible);
     }
 
@@ -156,7 +156,11 @@ public class CargaService {
      * @param categoria          Categoría asociada.
      * @return Objeto `Subcategoria` existente o recién creado.
      */
-    public void  manejarCategoria(String categoriaNombre, Subcategoria subcategoria) {
+    public Categoria manejarCategoria(String categoriaNombre, Subcategoria subcategoria) {
+        if (categoriaNombre == null || categoriaNombre.trim().isEmpty()) {
+            return null;
+        }
+
         Categoria categoria = categoriaService.obtenerCategoriaPorNombre(categoriaNombre);
         if (categoria == null) {
             categoria = new Categoria(categoriaNombre);
@@ -169,6 +173,7 @@ public class CargaService {
                 subcategoriaService.crearOActualizarSubcategoria(subcategoria);
             }
         }
+        return categoria;
     }
 
     /**
@@ -178,9 +183,14 @@ public class CargaService {
      * @param categoria    Categoría a asociar.
      * @param subcategoria Subcategoría a asociar.
      */
-    public void asociarSubcategoria(Libro libro, Subcategoria subcategoria) {
+    public void asociarSubcategoriaYCategoria(Libro libro, Subcategoria subcategoria, Categoria categoria) {
         if (!libro.haveSubcategoria(subcategoria.getNombre())) {
             libro.addSubcategoria(subcategoria);
+            libroService.actualizarLibro(libro);
+        }
+
+        if (!libro.haveCategoria(categoria.getNombre())) {
+            libro.addCategoria(categoria);
             libroService.actualizarLibro(libro);
         }
     }
