@@ -22,7 +22,7 @@ public class BusquedaController {
     }
 
     // Método para búsqueda de libros
-    @GetMapping("/libros/{regex}/parametro/{parametroBusqueda}/pagina/{noPagina}/tamano/{size}")
+    @GetMapping("/{regex}/parametro/{parametroBusqueda}/pagina/{noPagina}/tamano/{size}")
     public ResponseEntity<org.springframework.data.domain.Page<Libro>> buscarLibros(
             @PathVariable String regex,
             @PathVariable String parametroBusqueda,
@@ -34,7 +34,7 @@ public class BusquedaController {
     }
 
     // Método para búsqueda de ejemplares
-    @GetMapping("/ejemplares/{regex}/pagina/{noPagina}/tamano/{size}")
+    @GetMapping("/{regex}/pagina/{noPagina}/tamano/{size}")
     public ResponseEntity<Page<Ejemplar>> buscarEjemplares(
             @PathVariable String regex,
             @PathVariable int noPagina,
