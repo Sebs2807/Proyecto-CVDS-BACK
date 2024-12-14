@@ -38,7 +38,7 @@ class AuthorizationServiceTest {
         expectedResponse.setData(data);
 
         when(restTemplate.exchange(
-                eq("https://cvds-api-f4bjcdd7gjb5fffp.eastus-01.azurewebsites.net/auth/session"),
+                eq("https://zw8dshmxwa.execute-api.us-east-1.amazonaws.com/BiblioSoft/auth/session"),
                 eq(HttpMethod.GET),
                 any(HttpEntity.class),
                 eq(TokenResponse.class))
@@ -49,7 +49,7 @@ class AuthorizationServiceTest {
         assertNotNull(result);
         assertTrue(result.isValid());
         verify(restTemplate, times(1)).exchange(
-                eq("https://cvds-api-f4bjcdd7gjb5fffp.eastus-01.azurewebsites.net/auth/session"),
+                eq("https://zw8dshmxwa.execute-api.us-east-1.amazonaws.com/BiblioSoft/auth/session"),
                 eq(HttpMethod.GET),
                 any(HttpEntity.class),
                 eq(TokenResponse.class)
@@ -65,7 +65,7 @@ class AuthorizationServiceTest {
         expectedResponse.setData(data);
 
         when(restTemplate.exchange(
-                eq("https://cvds-api-f4bjcdd7gjb5fffp.eastus-01.azurewebsites.net/auth/session"),
+                eq("https://zw8dshmxwa.execute-api.us-east-1.amazonaws.com/BiblioSoft/auth/session"),
                 eq(HttpMethod.GET),
                 any(HttpEntity.class),
                 eq(TokenResponse.class))

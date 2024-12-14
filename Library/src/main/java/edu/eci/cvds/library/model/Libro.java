@@ -24,6 +24,9 @@ public class Libro {
     @DBRef(lazy = false)
     private List<Subcategoria> subcategorias;
 
+    @DBRef(lazy = false)
+    private List<Categoria> categorias;
+
     // Constructor vacío necesario para la deserialización
     public Libro(String nombreLibro, String autor, String editor, String edicion, String isbn, String sinopsis,
             String anioPublicacion) {
@@ -35,6 +38,7 @@ public class Libro {
         this.sinopsis = sinopsis;
         this.anioPublicacion = anioPublicacion;
         subcategorias = new ArrayList<>();
+        categorias = new ArrayList<>();
     }
 
     /**
@@ -174,49 +178,7 @@ public class Libro {
     }
 
     /**
-     * Obtiene la lista de ejemplares asociados al libro.
-     * 
-     * @return la lista de ejemplares.
-     */
-    // public List<Ejemplar> getEjemplares() {
-    // return ejemplares;
-    // }
-
-    /**
-     * Establece la lista de ejemplares asociados al libro.
-     * 
-     * @param ejemplares la lista de ejemplares.
-     */
-    // public void setEjemplares(List<Ejemplar> ejemplares) {
-    // this.ejemplares = ejemplares;
-    // }
-
-    /**
-     * Busca dentro de la lista de categorias si existe aguna con ese nombre de
-     * categoria.
-     * 
-     * @param nombreCategoria nombre de la categoria a buscar.
-     */
-    public Subcategoria findSubcategoria(String nombreSubcategoria) {
-        for (Subcategoria c : subcategorias) {
-            if (c.getNombre().equals(nombreSubcategoria)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Adiciona un nuevo ejemplar a la lista de de ejemplares.
-     * 
-     * @param categoria ejemplar que va ser adicionado.
-     */
-    // public void addEjemplar(Ejemplar ejemplar){
-    // this.ejemplares.add(ejemplar);
-    // }
-
-    /**
-     * Busca dentro de la lista de subcategorias si existe aguna con ese nombre de
+     * Busca dentro de la lista de subcategorias si existe alguna con ese nombre de
      * la subcategoria.
      * 
      * @param nombreSubcategoria booleano que indica si existe o no.
@@ -230,6 +192,22 @@ public class Libro {
         return false;
     }
 
+
+    /**
+     * Busca dentro de la lista de subcategorias si existe alguna con ese nombre de
+     * la subcategoria.
+     * 
+     * @param nombreCategoria booleano que indica si existe o no.
+     */
+    public boolean haveCategoria(String nombreCategoria) {
+        for (Categoria c : categorias) {
+            if (c.getNombre().equals(nombreCategoria)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Adiciona una nueva subcategoria a la lista de subcategorias.
      * 
@@ -237,6 +215,10 @@ public class Libro {
      */
     public void addSubcategoria(Subcategoria subcategoria) {
         this.subcategorias.add(subcategoria);
+    }
+
+    public void addCategoria(Categoria categoria) {
+        this.categorias.add(categoria);
     }
 
     public String getAnioPublicacion() {
